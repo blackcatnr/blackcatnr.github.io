@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> MustWin</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Free RTOS相关知识点："
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/08/26/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A/" class="article-date">
+  <time datetime="2023-08-26T15:29:17.421Z" itemprop="datePublished">2023-08-26</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">16 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <ol>
+<li><p>FreeRTOS支持的三种调度方式：<br> （1）抢占式调度：主要是针对优先级不同的任务，每一个任务都有一个优先级，优先级高的任务可以抢占优先级低的任务。<br> （2）时间片调度：主要是针对优先级相同的任务，当多个任务的优先级相同时，任务调度器会在每一个时钟节拍到的时候切换任务。（时间片1ms）在FreeRTOS中，一个时间片就是SysTick中断周期。更改时间片的大小，可由更改滴答定时器中断周期去实现。</p>
+<p> 补充：时间片：同等优先级的任务轮流的享有相同的CPU时间。在FreeRTOS中，一个时间片就等于一个SysTick中断周期</p>
+<p> （3）协程式调度：当前执行的任务会一直执行，同时高优先级的任务不会抢占低优先级的任务。</p>
+</li>
+<li><p>FreeRTOS中任务共存在四种状态：<br> （1）运行态：正在执行的任务，该任务就处于运行态，注意在STM32中，同一时间仅有一个任务处于运行态。<br> （2）就绪态：如果该任务已经能够被执行，但当前还未被执行，那么该任务处于就绪态。<br> （3）阻塞态：如果一个任务因为延时或等待外部事件发生，那么这个任务就处于阻塞态。<br> （4）挂起态：类似暂停，需要调用函数vTaskSuspend()进入挂起态，调用解挂vTaskResume()才可以进入到就绪态。&#x3D;&#x3D;注意：任务处于挂起态的时候经过解挂不会直接进入到运行态，只会进入到就绪态。同样阻塞态也不会直接进行到运行态，会进入到就绪态。仅就绪态可转变为运行态，其他状态的任务想运行，必须先转为就绪态。&#x3D;&#x3D;</p>
+</li>
+<li><p>系统配置文件：<br> FreeRTOSConfig.h 配置文件作用：对FreeRTOS进行功能配置和裁剪，以及API函数的使能。<br> （1）“INCLUDE”： 配置FreeRTOS中可选的API<br> （2）“config” ：完成FreeRTOS的功能配置和裁剪<br> （3）其他的配置项：完成PendSV（中断）宏定义、SVC宏定义</p>
+</li>
+<li><p>任务的创建和删除的API函数<br>    &#x3D;&#x3D;任务的创建和删除的本质就是调用FreeRTOS的API函数&#x3D;&#x3D;<br>    两种创建方式：（1）&#x3D;&#x3D;动态方式创建&#x3D;&#x3D;（xTaskCreate）———任务的任务控制块以及任务的栈空间所需的内存，&#x3D;&#x3D;均由FreeRTOS从FreeRTOS管理的堆中分配&#x3D;&#x3D;。（2）&#x3D;&#x3D;静态方式创建&#x3D;&#x3D;（xTaskCreateStatic）———任务的任务控制块以及任务的栈空间所需的内存，&#x3D;&#x3D;需要用户分配提供。&#x3D;&#x3D;任务删除函数（xTaskToDelete）待删除任务的任务句柄，用于删除已被创键的任务，被删除的任务将从就绪态任务列表、阻塞态任务列表、挂起态任务列表和事件列表中移除。<br> 静态创建任务流程：（1）使用静态创建任务，需要将宏configSUPPORT_STATIC_ALLOCATION配置成1<br>                               （2）定义空闲任务和定时器任务的任务堆栈及TCB<br>                               （3）实现两个接口函数vApplicationGetldleTaskMemory()、vApplicationGetTimerTaskMemory()<br>                               （4） 编写任务函数<br> 删除任务流程：        （1）使用删除任务函数，需要将宏INCLUDE_vTask Delete配置为1 </p>
+<p> ​                                   （2）入口参数输入需要删除的任务句柄（NULL代表删除本身）。删除任务自身，需要先添加等待删除列表，内     存释放将放在空闲任务执行 ，空闲任务会负责释放被删除任务中由系统分配的内存，但是由用户在任务删除前申请的内存，则需要由用户在任务被删除前提前释放，否则会导致内存泄漏。</p>
+</li>
+<li><p>任务的挂起与恢复的API函数</p>
+<p> ​      三个API函数：（1）vTaskSuspend()                     ———挂起任务<br> ​                               （2）vTaskResume()                      ———恢复被挂起的任务<br> ​                               （3）vTaskResumeFromISR()       ———在中断中恢复被挂起的任务</p>
+<h5 id="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。"><a href="#挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。" class="headerlink" title="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。"></a>挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。</h5><h5 id="恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1"><a href="#恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1" class="headerlink" title="恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D;"></a>恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D;</h5><h6 id="FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。"><a href="#FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。" class="headerlink" title="FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。"></a>FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。</h6><p> ​    vTaskSuspend(TaskHandle_t  vTaskSuspend) 形参为 vTaskSuspend，待挂起任务的任务句柄。注意：当传入的参数为NULL，则代表挂起任务自身（当前运行的任务）。<br> ​    vTaskResume(TaskHandle_t  vTaskResume) 形参为vTaskResume，恢复指定任务的任务句柄。注意：任务无论被挂起多少次，只需要调用vTaskResume()恢复一次，就可以继续运行。且被恢复的任务进入到就绪态。<br>   &#x3D;&#x3D;BaseType_t&#x3D;&#x3D; xTaskResumeFromISR(TaskHandle_t  xTaskResume)  被标记的为函数的返回值类型，形参为xTaskResume，待恢复的任务句柄。返回值类型有两种：①pdTRUE ———任务恢复后需要进行任务切换 （&#x3D;&#x3D;进行任务切换的情况可能为进行抢占式调度，当前恢复的任务的优先级大于正在执行的任务的优先级&#x3D;&#x3D;）②pdFALSE———任务恢复后不需要进行任务切换。&#x3D;&#x3D;注意：中断服务程序中要调用FreeRTOS的API函数则中断优先级不能超过FreeRTOS所管理的最高优先级。&#x3D;&#x3D;</p>
+<p> ​               &#x3D;&#x3D;小知识点补充：任务优先级是数值越大优先级越高，中断优先级是数值越小优先级越高。&#x3D;&#x3D;</p>
+</li>
+<li><p>中断管理</p>
+</li>
+</ol>
+<p>​           中断:让CPU打断正常运行的程序，转而去处理紧急的事件。中断属于异步异常。</p>
+<p>​           异常：导致处理器脱离正常运行转向执行特殊代码的任何事件，如果不及时处理，轻则系统出错，重则导致系统瘫痪。异常分类： 同步异常和异步异常。有内部事件引起的异常叫做同步异常。异步异常主要指由外部异常源产生的异常。</p>
+<p>​          中断执行机制：1.中断请求：外设产生中断请求（GPIO外部中断、定时器中断等）2.响应中断：CPU停止执行当前程序，转而去执行中断处理程序（ISR）3.退出中断：执行完毕，返回被打断的程序处，继续执行。</p>
+<p>​         中断优先级分组设置：1.低于configMAX_SYSCALL_INTERRUPT_PRIORITY优先级的中断里才允许调用FreeRTOS的API函数<br>​                                                2.建议将所有优先级位指定为抢占优先级位，方便FreeRTOS管理。（调用函数HAL_NVIC_SePriorityGrouping(NVIC_PRIORITYGROUP_4）</p>
+<p>​     三个系统中断优先级配置寄存器，分别为SHPR1、SHPR2、SHPR3，通过SHPR3将PendSV 和SysTick的中断优先级设置成最低优先级，保证系统任务切换不会阻塞系统其他中断的响应。</p>
+<p>​    三个中断屏蔽寄存器，分别为PRIMASK、FAULTMASK、BASEPRI。FreeRTOS所使用的中断管理就是利用的BASEPRI寄存器，BASEPRI：屏蔽优先级低于某一个阈值的中断。</p>
+<p>补充知识点：PendSV<strong>定义：</strong>可悬起异常，如果我们把它配置为最低<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E4%BC%98%E5%85%88%E7%BA%A7&spm=1001.2101.3001.7020">优先级</a>，那么如果同时有多个异常被触发，他会再其他异常执行完毕后再执行，而且任何异常都可以打断它。systick<strong>定义</strong>（就是一个基于M3、M4内核的一个简单的24bit,倒计时,自动重装载定时器，倒计时结束会产生一个中断。常用于做延时，在实时系统中做心跳时钟，用于任务的切换。</p>
+<p>​                                     1、systick定时器，就是系统滴答定时器</p>
+<p>​                                    2、24位自动重装载倒计时定时器</p>
+<p>​                                    3、当倒计时到0时，将从RELOAD寄存器中自动重装载初值</p>
+<p>​                                   4、只要不清除SysTick控制及状态寄存器的使能位，就永不停息，在睡眠模式下也能工作</p>
+<p>​                                    5、systick倒计时结束，会产生一个中断，且中断优先级可以设置</p>
+<ol start="7">
+<li>临界段代码保护</li>
+</ol>
+<p> &#x3D;&#x3D;临界段代码也叫做临界区，是指那些必须完整运行，不能被打断的代码段。&#x3D;&#x3D;适用场合：①外设：需要严格按照时序初始化的外设；②系统：系统自身；③用户自身</p>
+<p>FreeRTOS在进入临界段代码的时候需要关闭中断，当处理完临界段代码以后再打开中断。</p>
+<p>临界段代码保护函数：<br>                              ①taskENTER_CRITICAL() ———任务级进入临界段（关中断）<br>                              ②taskEXIT_CRITICAL() ———任务级退出临界段（开中断）<br>                              ③taskENTER_CRITICAL_FROM_ISR() ———中断级进入临界段（关中断）<br>                              ④taskEXIT_CRITICAL_FROM_ISR() ———中断级退出临界段（开中断）</p>
+<ol start="8">
+<li>任务调度器的挂起和恢复</li>
+</ol>
+<p>​       挂起任务调度器，调用此函数不需要关闭中断。</p>
+<p>函数：①vTaskSuspendAll()  挂起任务调度器<br>           ②xTaskResumeAII()   恢复任务调度器</p>
+<p>注意   1.与临界区不一样的是，挂起任务调度器，不需要关闭中断<br>           2.它仅仅是防止任务之间的资源争夺，中断照样可以直接响应；<br>           3.挂起调度器的方式，适用于临界区位于任务于任务之间，既不用去延时中断，又可以做到临界区的安全。</p>
+<ol start="9">
+<li>FreeRTOS的列表和列表项</li>
+</ol>
+<p>列表是FreeRTOS中的一个数据结构，概念上和链表类似，列表用来跟踪FreeRTOS中的任务。列表项就是放在列表中的项目。</p>
+<p>列表根节点定义：<br><code>typedef struct xLIST</code></p>
+<p><code>&#123;UBaseType_t uxNumberOfItems;</code>&#x2F;&#x2F;用于定于链表的节点计数器。用于表示该链表下有多少个节点，根节点除外。<br>   <code>ListItem_t * pxIndex;</code>&#x2F;&#x2F;链表节点索引指针，用于遍历节点。<br><code>MinListItem_t xListEnd;</code>&#x2F;&#x2F;链表的最后一个节点。<br><code>&#125;;</code></p>
+<p>列表项：</p>
+<p>​      <code>struct xLIST_ITEM</code><br><code>&#123;</code><br>​         <code>listFIRST_LIST_ITEM_INTEGRITY_CHECK_VALUE        用于检测列表项的数据完整（未用到可以不看）</code></p>
+<p>​        <code>configLIST_VOLATILE_TickType_t xltemValue          列表项的值</code><br>​        <code>struct xLIST_ITEM\*configLIST_VOLATILE  pxNext     下一个列表项</code><br>​        <code>struct xLIST_ITEM\*configLIST_VOLATILE  pxPrevious    上一个列表项</code><br>​        <code>void* pvOwner                                                                 列表项的拥有者</code><br>​        <code>struct xLIST_ITEM*configLIST_VOLATILE  pxContainer          列表项所在列表</code><br>​        <code>listSECOND_LIST_ITEM_INTEGRITY_CHECK_VALUE                 用于检测列表项的数据完整性（未用到可以不看）</code></p>
+<p><code>&#125;;</code></p>
+<p>（1）成员变量xltemValue为列表项的值<br>（2）成员变量pxNext 、 pxPrevious表示列表中列表项下一个列表项和上一个列表项<br>（3）成员变量pvOwner用于指向包含列表项的对象<br>（4）成员变量pxContainer用于指向列表项所在的列表</p>
+<p>迷你列表项：也是列表项，但迷你列表项仅用于标记列表的末尾和挂载在其他插入列表中的列表项。</p>
+<pre><code>  struct xMINI_LIST_ITEM
+</code></pre>
+<p><code>&#123;</code><br>        <code>listFIRST_LIST_ITEM_INTEGRITY_CHECK_VALUE         用于检测列表项的数据完整（未用到可以不看)</code><br>        <code>configLIST_VOLATILE_TickType_t xltemValue            列表项的值 </code></p>
+<p><code>           struct xLIST_ITEM\*configLIST_VOLATILE  pxNext     下一个列表项</code><br>          <code>struct xLIST_ITEM\*configLIST_VOLATILE  pxPrevious    上一个列表项</code></p>
+<p><code>&#125;</code>;</p>
+<p>（1）成员变量xltemValue为列表项的值，这个值多用于按升序对列表中的列表项进行排序<br>（2）成员变量pxNext 、 pxPrevious表示列表中列表项下一个列表项和上一个列表项<br>（3）迷你列表项仅用于标记列表的末尾和挂载在其他插入列表中的列表项，因此不需要成员变量pvOwner和pxContainer，以节省内存开销。</p>
+<ol start="10">
+<li>任务切换</li>
+</ol>
+<p>任务切换的实质：就是CPU寄存器的切换。</p>
+<p> 假设由任务A切换到任务B，主要分成两步：①需要暂停当前任务A的执行，并将此时任务A的寄存器保存到任务堆栈中，这个过程叫做任保存现场（压栈）。②将任务B的各个寄存器的值（被存于任务堆栈中）恢复到CPU寄存器中，这个过程叫做恢复现场（出栈）。对任务A的保存现场，任务B的恢复现场也叫做上下文切换。<br>注意：任务切换的过程在PendSV()中断服务函数里边完成。<br>             PendSV中断是如何触发的？（1）滴答定时器中断调用（2）执行FreeRTOS提供的相关API函数：portYIELD()。本质：通过向中断控制和状态寄存器ICSR（地址：0xE000_ED04）的bit写1挂起PendSV来启动PendSV中断。</p>
+<ol start="11">
+<li>时间片调度</li>
+</ol>
+<p>使用时间片调度需要把宏configUSE_TIME_SLICING和configUSE_PREEMPTION置1。</p>
+<p>时间统计API函数——void vTaskGetRunTimeStats(char* pcWriteBuffer)   此函数用于统计任务的运行时间，使用此函数需要将宏configGENERATE_RUN_TIME_STAT、configUSE_STATS_FORMATTING_FUNCTIONS置1。pcWriteBuffer接受任务运行时间信息的缓存指针。<br>时间统计API函数使用流程<br>（1）将宏configGENERATE_RUN_TIME_STAT置1.<br>（2）将宏configUSE_STATS_FORMATTING_FUNCTIONS置1.<br>（3）将宏configGENERATE_RUN_TIME_STAT置1后 ，还需要实现两个宏定义：①portCONFIGURE_TIME_FOR_RUNTIME_STATE():用于初始化用于配置任务运行时间统计的时基定时器；②portGET_RUN_TIME_COUNTER_VALUE():用于获取该功能时基硬件定时器计数的计数值。<br>延时函数：<br>        相对延时（vTaskDelay()）：指每次延时都是从执行函数vTaskDelay()开始，直到延时指定时间结束<br>        绝对延时（vTaskDelayUntil()）:指将整个任务的运行周期看成一个整体，适用于需要按照一定频率运行的任务。                      </p>
+<ol start="12">
+<li>队列</li>
+</ol>
+<p>队列又称为消息队列，队列可以在任务与任务之间、中断与任务之间传递信息，实现了任务接收来自于其他任务或中断的不固定长的数据。 任务能够从队列中读取消息，当队列中的消息为空时，读取消息的任务将被阻塞。</p>
+<p>FreeRTOS中的队列的特点：<br> ①数据出入队方式：队列采用”先进先出“（FIFO）的数据存储缓冲机制，即先入队的数据会先从队列出来。<br> ②数据传递方式： FreeRTOS中队列采用实际值传递，即将数据拷贝到队列中进行传递，FreeRTOS采用拷贝数据传递，也可以传递指针，所以在传达较大的数据的时候采用指针传递。<br> ③多人任务访问：队列不属于任何某个认任务，任何任务和中断都可以向队列发送&#x2F;读取消息。<br> ④出队、入队阻塞：当任务向一个队列发送消息时，可以指定一个阻塞时间。<br>      入队阻塞：队列已满，此时写不进去数据。①将该任务的状态列表项挂载在pxDelayedTasksList()(阻塞任务列表);②将任务的事件列表项挂载在xTaskWaitingToSend()(等待发送列表)。<br>      出队阻塞：队列为空 ，此时读取不了数据。①将该任务的状态列表项挂载在pxDelayedTasksList()(阻塞任务列表)；②将任务的事件列表项挂载在xTasksWaitingToReceive(); 	</p>
+<ol start="13">
+<li>信号量</li>
+</ol>
+<p>信号量是一种解决同步问题的机制，可以实现对共享资源的有序访问。是一种实现任务间通信的机制，可以实现任务之间同步或临界资源的互斥访问。&#x3D;&#x3D;信号量是一个非负的整数，&#x3D;&#x3D;所有获取它的任务都会将整数减一，当该整数值为0时，所有试图获取它的任务都将处于阻塞态。通常一个信号量的计数值用对应有效的资源数，表示剩下的可被占用的互斥资源数。</p>
+<p>&#x3D;&#x3D;当计数值大于0时，代表有信号量资源；当释放信号量，信号量计数值加1；当任务获取信号量时，信号量计数值减1。&#x3D;&#x3D;</p>
+<p>队列和信号量的区别：</p>
+<table>
+<thead>
+<tr>
+<th align="center">队列</th>
+<th align="center">信号量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">可以容纳多个数据；创建队列有两部分内存：队列结构体（消息队列的控制块）、队列项存储空间（队头+队尾）</td>
+<td align="center">仅存放计数值，无法存放其他数据；创建信号量，只需分配信号量的结构体</td>
+</tr>
+<tr>
+<td align="center">写入队列：当队列满时，可阻塞；</td>
+<td align="center">释放信号量：不可阻塞，计数值进行++；当计数值超过最大值时，返回失败</td>
+</tr>
+<tr>
+<td align="center">读取队列：当队列没有数据时，可阻塞；</td>
+<td align="center">获取信号量：计数值- -；当没有资源时，可以阻塞；</td>
+</tr>
+</tbody></table>
+<p>二值信号量：本质上就是一个队列长度为1的队列，该队列就只有空和满两种情况。通常用于互斥访问或任务同步，与互斥信号量比较类似，但是二值信号量有可能会导致优先级翻转问题，二值信号量更适合用于任务同步，互斥信号量更适合用于临界资源的访问。<br>&#x3D;&#x3D;二值信号量和互斥信号量区别：互斥量有优先级继承机制，二值信号量没有这个机制。&#x3D;&#x3D;<br>在FreeRTOS中，信号量用于同步，如任务与任务的同步、中断与任务的同步，可以大大提高效率。</p>
+<p>计数型信号量：本质上相当于队列长度大于1的队列，因此计数型信号量能够容纳多个资源，这个是在计数型信号量创建时确定的。<br>计数型信号量适用场合：①事件计数：当每次事件发生后，在事件处理函数中释放计数型信号量（计数值加1），其他任务会获计数型信号量（计数值减1），这个场合一般在创建时将初始计数值设置为0；②资源管理：信号量表示有效的资源数目。任务必须先获取信号量（信号量数值减1）才能获取资源控制权。当计数值减到0时，表示没有资源。当任务用完资源后，必须释放信号量（计数值加1）。信号量创建时计数值应等于最大资源数目。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blackcatnr.github.io/2023/08/26/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/08/26/1.markdown%E8%AF%AD%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            (no title)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/08/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%871/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> Nrui
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/favicon.ico" alt="MustWin"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
