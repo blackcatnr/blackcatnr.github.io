@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title></title>
-    <url>/2023/08/26/1.markdown%E8%AF%AD%E6%B3%95/</url>
+    <url>/2023/08/27/1.markdown%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<p>[TOC]</p>
 <h1 id="1-markdown语法"><a href="#1-markdown语法" class="headerlink" title="1.markdown语法"></a>1.markdown语法</h1><h2 id="1-1快捷键"><a href="#1-1快捷键" class="headerlink" title="1.1快捷键"></a>1.1快捷键</h2><table>
 <thead>
@@ -242,7 +242,7 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2023/08/26/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A/</url>
+    <url>/2023/08/27/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A/</url>
     <content><![CDATA[<ol>
 <li><p>FreeRTOS支持的三种调度方式：<br> （1）抢占式调度：主要是针对优先级不同的任务，每一个任务都有一个优先级，优先级高的任务可以抢占优先级低的任务。<br> （2）时间片调度：主要是针对优先级相同的任务，当多个任务的优先级相同时，任务调度器会在每一个时钟节拍到的时候切换任务。（时间片1ms）在FreeRTOS中，一个时间片就是SysTick中断周期。更改时间片的大小，可由更改滴答定时器中断周期去实现。</p>
 <p> 补充：时间片：同等优先级的任务轮流的享有相同的CPU时间。在FreeRTOS中，一个时间片就等于一个SysTick中断周期</p>
@@ -499,7 +499,7 @@
   </entry>
   <entry>
     <title></title>
-    <url>/2023/08/26/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%871/</url>
+    <url>/2023/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%871/</url>
     <content><![CDATA[<h2 id="芯片选型考虑哪些因素？"><a href="#芯片选型考虑哪些因素？" class="headerlink" title="芯片选型考虑哪些因素？"></a>芯片选型考虑哪些因素？</h2><ol>
 <li>性能：确保芯片具有足够的处理能力来满足项目需求。</li>
 <li>内存：选择具有足够RAM和ROM（或Flash）容量的芯片。</li>
