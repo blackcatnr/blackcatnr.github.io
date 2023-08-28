@@ -1,3 +1,732 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>LeetCodeTop100</title>
+    <url>/2023/07/26/LeetCodeTop100/</url>
+    <content><![CDATA[<h1 id="力扣TOP100"><a href="#力扣TOP100" class="headerlink" title="力扣TOP100"></a>力扣TOP100</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#section.1">哈希</a><a name="context.1"> </a></li>
+<li><a href="#section.2">双指针</a><a name="context.2"> </a></li>
+<li><a href="#section.3">滑动窗口</a><a name="context.3"> </a></li>
+<li><a href="#section.4">子串</a><a name="context.4"> </a></li>
+<li><a href="#section.5">数组</a><a name="context.5"> </a></li>
+<li><a href="#section.6">矩阵</a><a name="context.6"> </a></li>
+<li><a href="#section.7">链表</a><a name="context.7"> </a></li>
+</ul>
+<hr>
+<span id="more"></span>
+
+<p><a href="https://leetcode.cn/studyplan/top-100-liked/">LeetCode 热题 100 - 学习计划 - 力扣（LeetCode）全球极客挚爱的技术成长平台</a></p>
+<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希 "></a><a href="#context.1">哈希</a><a name="section.1"> </a></h2><p><a href="https://leetcode.cn/problems/two-sum/?envType=study-plan-v2&envId=top-100-liked">1. 两数之和 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</span></span><br><span class="line"><span class="comment">你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</span></span><br><span class="line"><span class="comment">你可以按任意顺序返回答案。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [2,7,11,15], target = 9</span></span><br><span class="line"><span class="comment">输出：[0,1]</span></span><br><span class="line"><span class="comment">解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [3,2,4], target = 6</span></span><br><span class="line"><span class="comment">输出：[1,2]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [3,3], target = 6</span></span><br><span class="line"><span class="comment">输出：[0,1]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2 &lt;= nums.length &lt;= 104</span></span><br><span class="line"><span class="comment">-109 &lt;= nums[i] &lt;= 109</span></span><br><span class="line"><span class="comment">-109 &lt;= target &lt;= 109</span></span><br><span class="line"><span class="comment">只会存在一个有效答案</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; um;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">                <span class="keyword">auto</span> it = um.<span class="built_in">find</span>(target - nums[i]);</span><br><span class="line">                <span class="keyword">if</span> (it != um.<span class="built_in">end</span>())</span><br><span class="line">                &#123;</span><br><span class="line">                    ret = &#123;it-&gt;second, i&#125;;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                um[nums[i]] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/group-anagrams/?envType=study-plan-v2&envId=top-100-liked">49. 字母异位词分组 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。</span></span><br><span class="line"><span class="comment">字母异位词 是由重新排列源单词的所有字母得到的一个新单词。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: strs = [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;]</span></span><br><span class="line"><span class="comment">输出: [[&quot;bat&quot;],[&quot;nat&quot;,&quot;tan&quot;],[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;]]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: strs = [&quot;&quot;]</span></span><br><span class="line"><span class="comment">输出: [[&quot;&quot;]]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: strs = [&quot;a&quot;]</span></span><br><span class="line"><span class="comment">输出: [[&quot;a&quot;]]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= strs.length &lt;= 104</span></span><br><span class="line"><span class="comment">0 &lt;= strs[i].length &lt;= 100</span></span><br><span class="line"><span class="comment">strs[i] 仅包含小写字母</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        vector&lt;vector&lt;string&gt;&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (!strs.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            unordered_map&lt;string, vector&lt;string&gt;&gt; um;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> str: strs)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="function">string <span class="title">s</span><span class="params">(<span class="number">26</span>, <span class="string">&#x27;0&#x27;</span>)</span></span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> c: str)</span><br><span class="line">                    ++s[c - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">                </span><br><span class="line">                um[s].<span class="built_in">emplace_back</span>(str);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; it: um)</span><br><span class="line">                ret.<span class="built_in">emplace_back</span>(it.second);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/longest-consecutive-sequence/?envType=study-plan-v2&envId=top-100-liked">128. 最长连续序列 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</span></span><br><span class="line"><span class="comment">请你设计并实现时间复杂度为 O(n) 的算法解决此问题。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [100,4,200,1,3,2]</span></span><br><span class="line"><span class="comment">输出：4</span></span><br><span class="line"><span class="comment">解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [0,3,7,2,5,8,4,6,0,1]</span></span><br><span class="line"><span class="comment">输出：9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">0 &lt;= nums.length &lt;= 105</span></span><br><span class="line"><span class="comment">-109 &lt;= nums[i] &lt;= 109</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">unordered_set&lt;<span class="type">int</span>&gt; <span class="title">us</span><span class="params">(nums.begin(), nums.end())</span></span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> num: nums)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!us.<span class="built_in">count</span>(num - <span class="number">1</span>))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">int</span> cur = num;</span><br><span class="line">                    <span class="type">int</span> size = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">while</span> (us.<span class="built_in">count</span>(++cur))</span><br><span class="line">                        ++size;</span><br><span class="line"></span><br><span class="line">                    ret = <span class="built_in">max</span>(ret, size);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针 "></a><a href="#context.2">双指针</a><a name="section.2"> </a></h2><p><a href="https://leetcode.cn/problems/move-zeroes/?envType=study-plan-v2&envId=top-100-liked">283. 移动零 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</span></span><br><span class="line"><span class="comment">请注意 ，必须在不复制数组的情况下原地对数组进行操作。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: nums = [0,1,0,3,12]</span></span><br><span class="line"><span class="comment">输出: [1,3,12,0,0]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: nums = [0]</span></span><br><span class="line"><span class="comment">输出: [0]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= nums.length &lt;= 104</span></span><br><span class="line"><span class="comment">-231 &lt;= nums[i] &lt;= 231 - 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (; fast &lt; nums.<span class="built_in">size</span>(); ++fast)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[fast] != <span class="number">0</span>)</span><br><span class="line">                    <span class="built_in">swap</span>(nums[slow++], nums[fast]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/container-with-most-water/?envType=study-plan-v2&envId=top-100-liked">11. 盛最多水的容器 - 力扣（LeetCode）</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/WYinhui/MyPicGo@master/img/image-20230808221705531.png" alt="image-20230808221705531"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。</span></span><br><span class="line"><span class="comment">找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</span></span><br><span class="line"><span class="comment">返回容器可以储存的最大水量。</span></span><br><span class="line"><span class="comment">说明：你不能倾斜容器。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：[1,8,6,2,5,4,8,3,7]</span></span><br><span class="line"><span class="comment">输出：49 </span></span><br><span class="line"><span class="comment">解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：height = [1,1]</span></span><br><span class="line"><span class="comment">输出：1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">n == height.length</span></span><br><span class="line"><span class="comment">2 &lt;= n &lt;= 105</span></span><br><span class="line"><span class="comment">0 &lt;= height[i] &lt;= 104</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (height.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> right = height.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right)</span><br><span class="line">            &#123;</span><br><span class="line">                len = right - left;</span><br><span class="line">                ret = height[left] &gt; height[right]</span><br><span class="line">                      ? <span class="built_in">max</span>(ret, len * height[right--])</span><br><span class="line">                      : <span class="built_in">max</span>(ret, len * height[left++]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/3sum/?envType=study-plan-v2&envId=top-100-liked">15. 3Sum - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请</span></span><br><span class="line"><span class="comment">你返回所有和为 0 且不重复的三元组。</span></span><br><span class="line"><span class="comment">注意：答案中不可以包含重复的三元组。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [-1,0,1,2,-1,-4]</span></span><br><span class="line"><span class="comment">输出：[[-1,-1,2],[-1,0,1]]</span></span><br><span class="line"><span class="comment">解释：</span></span><br><span class="line"><span class="comment">nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。</span></span><br><span class="line"><span class="comment">nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。</span></span><br><span class="line"><span class="comment">nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。</span></span><br><span class="line"><span class="comment">不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。</span></span><br><span class="line"><span class="comment">注意，输出的顺序和三元组的顺序并不重要。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [0,1,1]</span></span><br><span class="line"><span class="comment">输出：[]</span></span><br><span class="line"><span class="comment">解释：唯一可能的三元组和不为 0 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [0,0,0]</span></span><br><span class="line"><span class="comment">输出：[[0,0,0]]</span></span><br><span class="line"><span class="comment">解释：唯一可能的三元组和为 0 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3 &lt;= nums.length &lt;= 3000</span></span><br><span class="line"><span class="comment">-105 &lt;= nums[i] &lt;= 105</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &gt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> s = <span class="number">0</span>, e = nums.<span class="built_in">size</span>() - <span class="number">2</span>; s &lt; e; ++s)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[s] &gt; <span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s &gt; <span class="number">0</span> &amp;&amp; nums[s] == nums[s - <span class="number">1</span>])</span><br><span class="line">                    ;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">int</span> left = s + <span class="number">1</span>;</span><br><span class="line">                    <span class="type">int</span> right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">                    <span class="type">int</span> sum;</span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right)</span><br><span class="line">                    &#123;</span><br><span class="line">                        sum = nums[s] + nums[left] + nums[right];</span><br><span class="line">                        <span class="keyword">if</span> (sum &gt; <span class="number">0</span>)</span><br><span class="line">                            --right;</span><br><span class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; <span class="number">0</span>)</span><br><span class="line">                            ++left;</span><br><span class="line">                        <span class="keyword">else</span></span><br><span class="line">                        &#123;</span><br><span class="line">                            ret.<span class="built_in">emplace_back</span>(vector&lt;<span class="type">int</span>&gt;&#123;nums[s], nums[left], nums[right]&#125;);</span><br><span class="line">                            <span class="keyword">while</span> (++left &lt; right &amp;&amp; nums[left] == nums[left - <span class="number">1</span>]);</span><br><span class="line">                            <span class="keyword">while</span> (left &lt; --right &amp;&amp; nums[right] == nums[right + <span class="number">1</span>]);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/trapping-rain-water/?envType=study-plan-v2&envId=top-100-liked">42. 接雨水 - 力扣（LeetCode）</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/WYinhui/MyPicGo@master/img/image-20230808221849426.png" alt="image-20230808221849426"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]</span></span><br><span class="line"><span class="comment">输出：6</span></span><br><span class="line"><span class="comment">解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：height = [4,2,0,3,2,5]</span></span><br><span class="line"><span class="comment">输出：9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">n == height.length</span></span><br><span class="line"><span class="comment">1 &lt;= n &lt;= 2 * 104</span></span><br><span class="line"><span class="comment">0 &lt;= height[i] &lt;= 105</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">trap</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (height.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> left = <span class="number">0</span>, hl = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> right = height.<span class="built_in">size</span>() - <span class="number">1</span>, hr = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right)</span><br><span class="line">            &#123;</span><br><span class="line">                hl = <span class="built_in">max</span>(hl, height[left]);</span><br><span class="line">                hr = <span class="built_in">max</span>(hr, height[right]);</span><br><span class="line">                ret += height[left] &gt; height[right] ? hr - height[right--] : hl - height[left++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口 "></a><a href="#context.3">滑动窗口</a><a name="section.3"> </a></h2><p><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/?envType=study-plan-v2&envId=top-100-liked">3. 无重复字符的最长子串 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;abcabcbb&quot;</span></span><br><span class="line"><span class="comment">输出: 3 </span></span><br><span class="line"><span class="comment">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;bbbbb&quot;</span></span><br><span class="line"><span class="comment">输出: 1</span></span><br><span class="line"><span class="comment">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;pwwkew&quot;</span></span><br><span class="line"><span class="comment">输出: 3</span></span><br><span class="line"><span class="comment">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span></span><br><span class="line"><span class="comment">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span></span><br><span class="line"><span class="comment">     </span></span><br><span class="line"><span class="comment">0 &lt;= s.length &lt;= 5 * 104</span></span><br><span class="line"><span class="comment">s 由英文字母、数字、符号和空格组成</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!s.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">            <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">arr</span><span class="params">(<span class="number">128</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">            <span class="keyword">for</span> (; fast &lt; s.<span class="built_in">size</span>(); ++fast)</span><br><span class="line">            &#123;</span><br><span class="line">                slow = <span class="built_in">max</span>(slow, arr[s[fast]]);</span><br><span class="line">                arr[s[fast]] = fast + <span class="number">1</span>;</span><br><span class="line">                ret = <span class="built_in">max</span>(ret, fast - slow + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/?envType=study-plan-v2&envId=top-100-liked">438. 找到字符串中所有字母异位词 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。</span></span><br><span class="line"><span class="comment">异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;cbaebabacd&quot;, p = &quot;abc&quot;</span></span><br><span class="line"><span class="comment">输出: [0,6]</span></span><br><span class="line"><span class="comment">解释:</span></span><br><span class="line"><span class="comment">起始索引等于 0 的子串是 &quot;cba&quot;, 它是 &quot;abc&quot; 的异位词。</span></span><br><span class="line"><span class="comment">起始索引等于 6 的子串是 &quot;bac&quot;, 它是 &quot;abc&quot; 的异位词。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;abab&quot;, p = &quot;ab&quot;</span></span><br><span class="line"><span class="comment">输出: [0,1,2]</span></span><br><span class="line"><span class="comment">解释:</span></span><br><span class="line"><span class="comment">起始索引等于 0 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的异位词。</span></span><br><span class="line"><span class="comment">起始索引等于 1 的子串是 &quot;ba&quot;, 它是 &quot;ab&quot; 的异位词。</span></span><br><span class="line"><span class="comment">起始索引等于 2 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的异位词。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= s.length, p.length &lt;= 3 * 104</span></span><br><span class="line"><span class="comment">s 和 p 仅包含小写字母</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">findAnagrams</span><span class="params">(string s, string p)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ret;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">tar</span><span class="params">(<span class="number">26</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> c: p)</span><br><span class="line">            ++tar[c - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> fast = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; fast &lt; s.<span class="built_in">size</span>(); ++fast)</span><br><span class="line">        &#123;</span><br><span class="line">            --tar[s[fast] - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">while</span> (tar[s[fast] - <span class="string">&#x27;a&#x27;</span>] &lt; <span class="number">0</span>)</span><br><span class="line">                ++tar[s[slow++] - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (fast - slow + <span class="number">1</span> == p.<span class="built_in">size</span>())</span><br><span class="line">                ret.<span class="built_in">emplace_back</span>(slow);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="子串"><a href="#子串" class="headerlink" title="子串 "></a><a href="#context.4">子串</a><a name="section.4"> </a></h2><p><a href="https://leetcode.cn/problems/subarray-sum-equals-k/description/?envType=study-plan-v2&envId=top-100-liked">560. 和为 K 的子数组 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的连续子数组的个数 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [1,1,1], k = 2</span></span><br><span class="line"><span class="comment">输出：2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [1,2,3], k = 3</span></span><br><span class="line"><span class="comment">输出：2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= nums.length &lt;= 2 * 104</span></span><br><span class="line"><span class="comment">-1000 &lt;= nums[i] &lt;= 1000</span></span><br><span class="line"><span class="comment">-107 &lt;= k &lt;= 107</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* 前缀 + 哈希 */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; um;</span><br><span class="line">            <span class="type">int</span> pre = <span class="number">0</span>;</span><br><span class="line">            um[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> n: nums)</span><br><span class="line">            &#123;</span><br><span class="line">                pre += n;</span><br><span class="line">                <span class="keyword">if</span> (um.<span class="built_in">count</span>(pre - k))</span><br><span class="line">                    ret += um[pre - k];</span><br><span class="line"></span><br><span class="line">                ++um[pre];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/sliding-window-maximum/?envType=study-plan-v2&envId=top-100-liked">239. 滑动窗口最大值 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。</span></span><br><span class="line"><span class="comment">返回 滑动窗口中的最大值 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [1,3,-1,-3,5,3,6,7], k = 3</span></span><br><span class="line"><span class="comment">输出：[3,3,5,5,6,7]</span></span><br><span class="line"><span class="comment">解释：</span></span><br><span class="line"><span class="comment">滑动窗口的位置                最大值</span></span><br><span class="line"><span class="comment">---------------               -----</span></span><br><span class="line"><span class="comment">[1  3  -1] -3  5  3  6  7       3</span></span><br><span class="line"><span class="comment"> 1 [3  -1  -3] 5  3  6  7       3</span></span><br><span class="line"><span class="comment"> 1  3 [-1  -3  5] 3  6  7       5</span></span><br><span class="line"><span class="comment"> 1  3  -1 [-3  5  3] 6  7       5</span></span><br><span class="line"><span class="comment"> 1  3  -1  -3 [5  3  6] 7       6</span></span><br><span class="line"><span class="comment"> 1  3  -1  -3  5 [3  6  7]      7</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">输入：nums = [1], k = 1</span></span><br><span class="line"><span class="comment">输出：[1]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= nums.length &lt;= 105</span></span><br><span class="line"><span class="comment">-104 &lt;= nums[i] &lt;= 104</span></span><br><span class="line"><span class="comment">1 &lt;= k &lt;= nums.length</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 采用堆结构 priority_queue</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            priority_queue&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt; pq;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; ++i) &#123;</span><br><span class="line">                pq.<span class="built_in">emplace</span>(nums[i], i);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ret.<span class="built_in">emplace_back</span>(pq.<span class="built_in">top</span>().first);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = k; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                pq.<span class="built_in">emplace</span>(nums[i], i);</span><br><span class="line">                <span class="keyword">while</span> (pq.<span class="built_in">top</span>().second &lt;= i - k)</span><br><span class="line">                    pq.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">                ret.<span class="built_in">emplace_back</span>(pq.<span class="built_in">top</span>().first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">时间复杂度：O(nlog⁡n)，其中 n 是数组 nums 的长度。在最坏情况下，数组 nums 中的元素单调递增，那么最终优先队列中包含了所有元素，没有元素被移除。由于将一个元素放入优先队列的时间复杂度为 O(log⁡n)，因此总时间复杂度为 O(nlog⁡n)。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">空间复杂度：O(n)，即为优先队列需要使用的空间。这里所有的空间复杂度分析都不考虑返回的答案需要的 O(n) 空间，只计算额外的空间使用。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">///&lt; Method 2: 单调栈 deque</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            deque&lt;<span class="type">int</span>&gt; dq;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; ++i) &#123;</span><br><span class="line">                <span class="keyword">while</span> (!dq.<span class="built_in">empty</span>() &amp;&amp; nums[i] &gt;= nums[dq.<span class="built_in">back</span>()])</span><br><span class="line">                    dq.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">                dq.<span class="built_in">emplace_back</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ret.<span class="built_in">emplace_back</span>(nums[dq.<span class="built_in">front</span>()]);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = k; i &lt; nums.<span class="built_in">size</span>(); ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> (!dq.<span class="built_in">empty</span>() &amp;&amp; nums[i] &gt;= nums[dq.<span class="built_in">back</span>()])</span><br><span class="line">                    dq.<span class="built_in">pop_back</span>();</span><br><span class="line"></span><br><span class="line">                dq.<span class="built_in">emplace_back</span>(i);</span><br><span class="line">                <span class="keyword">while</span> (!dq.<span class="built_in">empty</span>() &amp;&amp; dq.<span class="built_in">front</span>() &lt;= i - k)</span><br><span class="line">                    dq.<span class="built_in">pop_front</span>();</span><br><span class="line">                </span><br><span class="line">                ret.<span class="built_in">emplace_back</span>(nums[dq.<span class="built_in">front</span>()]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">时间复杂度：O(n)，其中 n 是数组 nums 的长度。每一个下标恰好被放入队列一次，并且最多被弹出队列一次，因此时间复杂度为 O(n)。</span></span><br><span class="line"><span class="comment">空间复杂度：O(k)，与方法一不同的是，在方法二中我们使用的数据结构是双向的，因此「不断从队首弹出元素」保证了队列中最多不会有超过 k+1 个元素，因此队列使用的空间为 O(k)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-100-liked">76. 最小覆盖子串 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 &quot;&quot; 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">注意：</span></span><br><span class="line"><span class="comment">对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。</span></span><br><span class="line"><span class="comment">如果 s 中存在这样的子串，我们保证它是唯一的答案。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：s = &quot;ADOBECODEBANC&quot;, t = &quot;ABC&quot;</span></span><br><span class="line"><span class="comment">输出：&quot;BANC&quot;</span></span><br><span class="line"><span class="comment">解释：最小覆盖子串 &quot;BANC&quot; 包含来自字符串 t 的 &#x27;A&#x27;、&#x27;B&#x27; 和 &#x27;C&#x27;。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：s = &quot;a&quot;, t = &quot;a&quot;</span></span><br><span class="line"><span class="comment">输出：&quot;a&quot;</span></span><br><span class="line"><span class="comment">解释：整个字符串 s 是最小覆盖子串。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入: s = &quot;a&quot;, t = &quot;aa&quot;</span></span><br><span class="line"><span class="comment">输出: &quot;&quot;</span></span><br><span class="line"><span class="comment">解释: t 中两个字符 &#x27;a&#x27; 均应包含在 s 的子串中，</span></span><br><span class="line"><span class="comment">因此没有符合条件的子字符串，返回空字符串。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">m == s.length</span></span><br><span class="line"><span class="comment">n == t.length</span></span><br><span class="line"><span class="comment">1 &lt;= m, n &lt;= 105</span></span><br><span class="line"><span class="comment">s 和 t 由英文字母组成</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 滑动窗口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">minWindow</span><span class="params">(string s, string t)</span> </span>&#123;</span><br><span class="line">        string ret;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() &gt;= t.<span class="built_in">size</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> need = <span class="number">0</span>;</span><br><span class="line">            unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; um;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> c: t)</span><br><span class="line">            &#123;</span><br><span class="line">                --um[c];</span><br><span class="line">                ++need;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> slow = <span class="number">0</span>, fast, start;</span><br><span class="line">            <span class="type">int</span> min_size = INT_MAX;</span><br><span class="line">            deque&lt;<span class="type">int</span>&gt; dq;</span><br><span class="line">            <span class="keyword">while</span> (slow &lt; s.<span class="built_in">size</span>() &amp;&amp; !um.<span class="built_in">count</span>(s[slow])) ++slow;</span><br><span class="line">            <span class="keyword">for</span> (fast = slow; fast &lt; s.<span class="built_in">size</span>(); ++fast)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (um.<span class="built_in">count</span>(s[fast]))</span><br><span class="line">                &#123;</span><br><span class="line">                    need -= ++um[s[fast]] &lt;= <span class="number">0</span>;</span><br><span class="line">                    dq.<span class="built_in">emplace_back</span>(fast);</span><br><span class="line">                    <span class="keyword">while</span> (need == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span> (fast - slow + <span class="number">1</span> &lt; min_size)</span><br><span class="line">                        &#123;</span><br><span class="line">                            start = slow;</span><br><span class="line">                            min_size = fast - slow + <span class="number">1</span>;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> (--um[s[slow]] &lt; <span class="number">0</span>)</span><br><span class="line">                            ++need;</span><br><span class="line"></span><br><span class="line">                        dq.<span class="built_in">pop_front</span>();</span><br><span class="line">                        slow = dq.<span class="built_in">front</span>();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (min_size != INT_MAX)</span><br><span class="line">                ret = s.<span class="built_in">substr</span>(start, min_size);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组 "></a><a href="#context.5">数组</a><a name="section.5"> </a></h2><p><a href="https://leetcode.cn/problems/maximum-subarray/description/?envType=study-plan-v2&envId=top-100-liked">53. 最大子数组和 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</span></span><br><span class="line"><span class="comment">子数组 是数组中的一个连续部分。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [-2,1,-3,4,-1,2,1,-5,4]</span></span><br><span class="line"><span class="comment">输出：6</span></span><br><span class="line"><span class="comment">解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [1]</span></span><br><span class="line"><span class="comment">输出：1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [5,4,-1,7,8]</span></span><br><span class="line"><span class="comment">输出：23</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= nums.length &lt;= 105</span></span><br><span class="line"><span class="comment">-104 &lt;= nums[i] &lt;= 104</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 动规（无后效性）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            ret = nums[<span class="number">0</span>];</span><br><span class="line">            <span class="type">int</span> pre = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> num: nums) &#123;</span><br><span class="line">                pre = <span class="built_in">max</span>(pre + num, num);</span><br><span class="line">                ret = <span class="built_in">max</span>(ret, pre);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/merge-intervals/description/?envType=study-plan-v2&envId=top-100-liked">56. 合并区间 - 力扣（LeetCode）</a></p>
+<p><a href="https://leetcode.cn/problems/rotate-array/?envType=study-plan-v2&envId=top-100-liked">189. 轮转数组 - 力扣（LeetCode）</a></p>
+<p><a href="https://leetcode.cn/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=top-100-liked">238. 除自身以外数组的乘积 - 力扣（LeetCode）</a></p>
+<p><a href="https://leetcode.cn/problems/first-missing-positive/description/">41. 缺失的第一个正数 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数。</span></span><br><span class="line"><span class="comment">请你实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [1,2,0]</span></span><br><span class="line"><span class="comment">输出：3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [3,4,-1,1]</span></span><br><span class="line"><span class="comment">输出：2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：nums = [7,8,9,11,12]</span></span><br><span class="line"><span class="comment">输出：1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1 &lt;= nums.length &lt;= 5 * 105</span></span><br><span class="line"><span class="comment">-231 &lt;= nums[i] &lt;= 231 - 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 在元素组上哈希</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">firstMissingPositive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!nums.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            ret = nums.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &lt;= <span class="number">0</span>)</span><br><span class="line">                    nums[i] = nums.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">                <span class="type">int</span> num = <span class="built_in">abs</span>(nums[i]);</span><br><span class="line">                <span class="keyword">if</span> (num &lt;= nums.<span class="built_in">size</span>()) <span class="comment">///&lt; num [1, N]</span></span><br><span class="line">                    nums[num - <span class="number">1</span>] = -<span class="built_in">abs</span>(nums[num - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ret = i + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵 "></a><a href="#context.6">矩阵</a><a name="section.6"> </a></h2><p><a href="https://leetcode.cn/problems/set-matrix-zeroes/description/?envType=study-plan-v2&envId=top-100-liked">73. 矩阵置零 - 力扣（LeetCode）</a></p>
+<p><a href="https://leetcode.cn/problems/spiral-matrix/?envType=study-plan-v2&envId=top-100-liked">54. 螺旋矩阵 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]</span></span><br><span class="line"><span class="comment">输出：[1,2,3,6,9,8,7,4,5]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]</span></span><br><span class="line"><span class="comment">输出：[1,2,3,4,8,12,11,10,9,5,6,7]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">m == matrix.length</span></span><br><span class="line"><span class="comment">n == matrix[i].length</span></span><br><span class="line"><span class="comment">1 &lt;= m, n &lt;= 10</span></span><br><span class="line"><span class="comment">-100 &lt;= matrix[i][j] &lt;= 100</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">spiralOrder</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">if</span> (!matrix.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> r = matrix[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> d = matrix.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> l = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> u = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = l; i &lt;= r; ++i) ret.<span class="built_in">emplace_back</span>(matrix[u][i]);</span><br><span class="line">                <span class="keyword">if</span> (++u &gt; d)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = u; i &lt;= d; ++i) ret.<span class="built_in">emplace_back</span>(matrix[i][r]);</span><br><span class="line">                <span class="keyword">if</span> (--r &lt; l)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = r; i &gt;= l; --i) ret.<span class="built_in">emplace_back</span>(matrix[d][i]);</span><br><span class="line">                <span class="keyword">if</span> (--d &lt; u)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = d; i &gt;= u; --i) ret.<span class="built_in">emplace_back</span>(matrix[i][l]);</span><br><span class="line">                <span class="keyword">if</span> (++l &gt; r)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/rotate-image/description/?envType=study-plan-v2&envId=top-100-liked">48. 旋转图像 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。</span></span><br><span class="line"><span class="comment">你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]</span></span><br><span class="line"><span class="comment">输出：[[7,4,1],[8,5,2],[9,6,3]]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]</span></span><br><span class="line"><span class="comment">输出：[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">n == matrix.length == matrix[i].length</span></span><br><span class="line"><span class="comment">1 &lt;= n &lt;= 20</span></span><br><span class="line"><span class="comment">-1000 &lt;= matrix[i][j] &lt;= 1000</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!matrix.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> u = <span class="number">0</span>, d = matrix.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> l = <span class="number">0</span>, r = matrix[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = l, j = u; i &lt; r; ++i, ++j)</span><br><span class="line">                    <span class="built_in">swap</span>(matrix[u][i], matrix[j][r]);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = l, j = r; i &lt; r; ++i, --j)</span><br><span class="line">                    <span class="built_in">swap</span>(matrix[u][i], matrix[d][j]);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = l, j = d; i &lt; r; ++i, --j)</span><br><span class="line">                    <span class="built_in">swap</span>(matrix[u][i], matrix[j][l]);</span><br><span class="line"></span><br><span class="line">                ++u;</span><br><span class="line">                --d;</span><br><span class="line">                ++l;</span><br><span class="line">                --r;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (l &gt;= r)</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/search-a-2d-matrix-ii/description/?envType=study-plan-v2&envId=top-100-liked">240. 搜索二维矩阵 II - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：</span></span><br><span class="line"><span class="comment">每行的元素从左到右升序排列。</span></span><br><span class="line"><span class="comment">每列的元素从上到下升序排列。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5</span></span><br><span class="line"><span class="comment">输出：true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20</span></span><br><span class="line"><span class="comment">输出：false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">m == matrix.length</span></span><br><span class="line"><span class="comment">n == matrix[i].length</span></span><br><span class="line"><span class="comment">1 &lt;= n, m &lt;= 300</span></span><br><span class="line"><span class="comment">-109 &lt;= matrix[i][j] &lt;= 109</span></span><br><span class="line"><span class="comment">每行的所有元素从左到右升序排列</span></span><br><span class="line"><span class="comment">每列的所有元素从上到下升序排列</span></span><br><span class="line"><span class="comment">-109 &lt;= target &lt;= 109</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 矩阵向左旋转45度，转换为BST树(二叉搜索树)，左树小，右树大</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">searchMatrix</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; matrix, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!matrix.<span class="built_in">empty</span>() &amp;&amp; matrix[<span class="number">0</span>][<span class="number">0</span>] &lt;= target)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> col = matrix[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>;  <span class="comment">///&lt; 列</span></span><br><span class="line">            <span class="type">int</span> row = <span class="number">0</span>;  <span class="comment">///&lt; 行</span></span><br><span class="line">            <span class="keyword">while</span> (col &gt;= <span class="number">0</span> &amp;&amp; row &lt; matrix.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[row][col] &lt; target)</span><br><span class="line">                    ++row;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][col] &gt; target)</span><br><span class="line">                    --col;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ret = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表 "></a><a href="#context.7">链表</a><a name="section.7"> </a></h2><p><a href="https://leetcode.cn/problems/intersection-of-two-linked-lists/description/?envType=study-plan-v2&envId=top-100-liked">160. 相交链表 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">listA 中节点数目为 m</span></span><br><span class="line"><span class="comment">listB 中节点数目为 n</span></span><br><span class="line"><span class="comment">1 &lt;= m, n &lt;= 3 * 104</span></span><br><span class="line"><span class="comment">1 &lt;= Node.val &lt;= 105</span></span><br><span class="line"><span class="comment">0 &lt;= skipA &lt;= m</span></span><br><span class="line"><span class="comment">0 &lt;= skipB &lt;= n</span></span><br><span class="line"><span class="comment">如果 listA 和 listB 没有交点，intersectVal 为 0</span></span><br><span class="line"><span class="comment">如果 listA 和 listB 有交点，intersectVal == listA[skipA] == listB[skipB]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 双指针，两条路各走一遍</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span> </span>&#123;</span><br><span class="line">        ListNode *ret = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (headA &amp;&amp; headB)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode *pa = headA, *pb = headB;</span><br><span class="line">            <span class="keyword">while</span> (pa != pb)</span><br><span class="line">            &#123;</span><br><span class="line">                pa = pa == <span class="literal">nullptr</span> ? headB : pa-&gt;next;</span><br><span class="line">                pb = pb == <span class="literal">nullptr</span> ? headA : pb-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ret = pa;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/reverse-linked-list/description/?envType=study-plan-v2&envId=top-100-liked">206. 反转链表 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入：head = [1,2,3,4,5]</span></span><br><span class="line"><span class="comment">输出：[5,4,3,2,1]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 三指针赋值 pre cur next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *ret = <span class="literal">nullptr</span>, *next;</span><br><span class="line">        <span class="keyword">while</span>  (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            next = head-&gt;next;</span><br><span class="line">            head-&gt;next = ret;</span><br><span class="line">            ret = head;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/palindrome-linked-list/description/?envType=study-plan-v2&envId=top-100-liked">234. 回文链表 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">链表中节点数目在范围[1, 105] 内</span></span><br><span class="line"><span class="comment">0 &lt;= Node.val &lt;= 9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 存vector转用双指针法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">            <span class="keyword">do</span></span><br><span class="line">            &#123;</span><br><span class="line">                arr.<span class="built_in">emplace_back</span>(head-&gt;val);</span><br><span class="line">                head = head-&gt;next;</span><br><span class="line">            &#125; <span class="keyword">while</span> (head != <span class="literal">nullptr</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> l = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> r = arr.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r &amp;&amp; arr[l] == arr[r])</span><br><span class="line">            &#123;</span><br><span class="line">                ++l;</span><br><span class="line">                --r;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            ret = l &gt;= r;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">///&lt; Method 2: 快慢指针 + 反转链表</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">Reverse</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 已知非空，故不做判断</span></span><br><span class="line">        ListNode *ret = <span class="literal">nullptr</span>, *next;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            next = head-&gt;next;</span><br><span class="line">            head-&gt;next = ret;</span><br><span class="line">            ret = head;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode *fast = head;</span><br><span class="line">            ListNode *slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (fast-&gt;next != <span class="literal">nullptr</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ListNode *temp = fast-&gt;next ? fast-&gt;next : fast;</span><br><span class="line">            <span class="keyword">if</span> (head-&gt;val == temp-&gt;val)</span><br><span class="line">            &#123;</span><br><span class="line">                slow-&gt;next = <span class="built_in">Reverse</span>(slow-&gt;next);</span><br><span class="line">                <span class="keyword">while</span> (temp != <span class="literal">nullptr</span> &amp;&amp; head-&gt;val == temp-&gt;val)</span><br><span class="line">                &#123;</span><br><span class="line">                    temp = temp-&gt;next;</span><br><span class="line">                    head = head-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                ret = temp == <span class="literal">nullptr</span>;</span><br><span class="line">                slow-&gt;next = <span class="built_in">Reverse</span>(slow-&gt;next);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/linked-list-cycle/description/?envType=study-plan-v2&envId=top-100-liked">141. 环形链表 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给你一个链表的头节点 head ，判断链表中是否有环。</span></span><br><span class="line"><span class="comment">如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。</span></span><br><span class="line"><span class="comment">如果链表中存在环 ，则返回 true 。 否则，返回 false 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">进阶：你能用 O(1)（即，常量）内存解决此问题吗？</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 快慢指针</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ListNode *fast = head-&gt;next;</span><br><span class="line">            ListNode *slow = head;</span><br><span class="line">            <span class="keyword">while</span> (fast != slow &amp;&amp; fast)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next ? fast-&gt;next-&gt;next : fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ret = fast != <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/linked-list-cycle-ii/description/?envType=study-plan-v2&envId=top-100-liked">142. 环形链表 II - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</span></span><br><span class="line"><span class="comment">如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</span></span><br><span class="line"><span class="comment">不允许修改 链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">进阶：你是否可以使用 O(1) 空间解决此题？</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 哈希表</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *ret = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            unordered_set&lt;ListNode *&gt; us;</span><br><span class="line">            <span class="keyword">do</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!us.<span class="built_in">count</span>(head))</span><br><span class="line">                &#123;</span><br><span class="line">                    us.<span class="built_in">emplace</span>(head);</span><br><span class="line">                    head = head-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    ret = head;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">while</span> (head);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">///&lt; Method 2: 快慢指针</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *ret = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)</span><br><span class="line">        &#123;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (fast == slow)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> (head != fast)</span><br><span class="line">                &#123;</span><br><span class="line">                    head = head-&gt;next;</span><br><span class="line">                    fast = fast-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ret = head;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://leetcode.cn/problems/merge-two-sorted-lists/description/?envType=study-plan-v2&envId=top-100-liked">21. 合并两个有序链表 - 力扣（LeetCode）</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">两个链表的节点数目范围是 [0, 50]</span></span><br><span class="line"><span class="comment">-100 &lt;= Node.val &lt;= 100</span></span><br><span class="line"><span class="comment">l1 和 l2 均按 非递减顺序 排列</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">///&lt; Method 1: 暴力(略)</span></span><br><span class="line"><span class="comment">///&lt; Method 2: 循环迭代 + 智能指针</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        <span class="function">unique_ptr&lt;ListNode&gt; <span class="title">ptr</span><span class="params">(<span class="keyword">new</span> ListNode())</span></span>;</span><br><span class="line">        ListNode *pre = ptr.<span class="built_in">get</span>();</span><br><span class="line">        <span class="keyword">while</span> (list1 &amp;&amp; list2)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (list1-&gt;val &lt; list2-&gt;val)</span><br><span class="line">            &#123;</span><br><span class="line">                pre-&gt;next = list1;</span><br><span class="line">                list1 = list1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                pre-&gt;next = list2;</span><br><span class="line">                list2 = list2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        pre-&gt;next = list1 ? list1 : list2;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ptr-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>星海</category>
+      </categories>
+      <tags>
+        <tag>星海</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/08/28/Protocols/</url>
+    <content><![CDATA[<h3 id="嵌入式五大协议（UART、RS232、RS485、IIC、SPI）"><a href="#嵌入式五大协议（UART、RS232、RS485、IIC、SPI）" class="headerlink" title="嵌入式五大协议（UART、RS232、RS485、IIC、SPI）"></a><strong>嵌入式五大协议（UART、RS232、RS485、IIC、SPI）</strong></h3><h4 id="1-UART总线通信协议"><a href="#1-UART总线通信协议" class="headerlink" title="1.UART总线通信协议"></a>1.UART总线通信协议</h4><p>（1）原理：串口通讯的数据包由发送设备通过自身的TXD接口传输到接收设备的RXD接口。在串口通讯的协议层中，规定了数据包的内容，它<strong>由启始位、主体数据、校验位以及停止位组成</strong>， 通讯双方的数据包格式要约定一致才能正常收发数据。</p>
+<p><img src="C:\Users\倪瑞\AppData\Roaming\Typora\typora-user-images\image-20230828134547522.png" alt="image-20230828134547522"></p>
+<p>（2）波特率：异步通讯中由于没有时钟信号，所以两个通讯设备之间需要约定好波特率， 即每个码元的长度，以便对信号进行解码，<strong>常见的波特率为4800、9600、115200等</strong>。</p>
+<p>（3）数据校验：在有效数据之后，有一个可选的数据校验位，由于<strong>数据通信相对更容易受到外部干扰导致传输数据出现偏差，可以在传输过程加上校验位来解决这个问题</strong>。校验方法有奇校验(odd)、偶校验(even)、0校验(space)、1校验(mark)以及无校验(noparity)。</p>
+<ul>
+<li><strong>奇校验</strong>要求有效数据和校验位中”1”的个数为奇数，比如一个8位长的有效数据为：01101001，此时总共有4个”1”，为达到奇校验效果，校验位为”1”， 最后传输的数据将是8位的有效数据加上1位的校验位总共9位。</li>
+<li><strong>偶校验</strong>与奇校验要求刚好相反，要求帧数据和校验位中”1”的个数为偶数，比如数据帧：11001010，此时数据帧”1”的个数为4个，所以偶校验位为”0”。</li>
+<li><strong>0校验</strong>是不管有效数据中的内容是什么，校验位总为”0”。</li>
+<li><strong>1校验</strong>是校验位总为”1”。</li>
+<li>在<strong>无校验</strong>的情况下，数据包中不包含校验位。</li>
+</ul>
+<h4 id="2-IIC总线通信协议"><a href="#2-IIC总线通信协议" class="headerlink" title="2.IIC总线通信协议"></a>2.IIC总线通信协议</h4><p>（1）主要用途：<strong>SOC和周边外设间的通信</strong>（如：EEPROM，电容触摸芯片，各种Sensor等）。</p>
+<p>（2）物理接口：I2C总线只使用两条双向漏极开路的信号线（串行数据线：SDA，及串行时钟线：SCL），并利用电阻上拉。</p>
+<ul>
+<li>SCL（Serial Clock）：串行时钟线，传输CLK信号，<strong>一般是主设备向从设备提供</strong>；</li>
+<li>SDA（Serial Data）：串行数据线，传输通信数据 I2C使用一个7bit的设备地址，<strong>一组总线最多和112个节点通信</strong>。最大通信数受限于地址空间及400pF的总线电容。</li>
+</ul>
+<p>常见的I2C总线<strong>以传输速率的不同分为不同的模式</strong>：标准模式（100Kbit&#x2F;s）、低速模式（10Kbit&#x2F;s）、快速模式（400Kbit&#x2F;s）、高速模式（3.4Mbit&#x2F;s）， 时钟频率可以被下降到零，即暂停通信。该总线是一种多主控总线，即可以在总线上放置多个主设备节点，在停止位（P）发出后，即通讯结束后，主设备节点可以成为从设备节点。<br><strong>主设备节点：</strong>产生时钟并发起通信的设备节点。<br><strong>从设备节点：</strong>接收时钟并响应主设备节点寻址的设备节点。</p>
+<p><img src="C:\Users\倪瑞\AppData\Roaming\Typora\typora-user-images\image-20230828145435761.png" alt="image-20230828145435761"></p>
+<p>① I2C通信双方<strong>地位不对等</strong>，通信由主设备发起，并主导传输过程，从设备按I2C协议接收主设备发送的数据，并及时给出响应。<br>② <strong>主设备、从设备由通信双方决定</strong>（I2C协议本身无规定），既能当主设备，也能当从设备（需要软件进行配置）。<br>③ <strong>主设备负责调度总线</strong>，决定某一时刻和哪个从设备通信。同一时刻，I2C总线上只能有一对主设备、从设备通信。<br>④<strong>每个I2C从设备在I2C总线通讯中有一个I2C从设备地址</strong>，该地址唯一，是从设备的固有属性，通信中主设备通过从设备地址来找到从设备。</p>
+<p>（3）I2C总线通讯由起始位开始通讯，结束位停止通讯，并释放I2C总线。起始位和结束位都由主设备发出。<br><strong>起始位（S）</strong>：在SCL为高电平时，SDA由高电平变为低电平。<br><strong>结束位（P）</strong>：在SCL为高电平时，SDA由低电平变为高电平。</p>
+<p><img src="C:\Users\倪瑞\AppData\Roaming\Typora\typora-user-images\image-20230828161710153.png" alt="image-20230828161710153"></p>
+<h4 id="3-SPI总线通讯协议"><a href="#3-SPI总线通讯协议" class="headerlink" title="3.SPI总线通讯协议"></a>3.SPI总线通讯协议</h4><p>SPI接口是Motorola首先提出的全双工同步串行总线，采用主从模式（Master Slave）架构，支持多slave模式应用。</p>
+<p><strong>SPI四根信号线</strong></p>
+<ul>
+<li>设备选择线：NSS：从器件使能信号，由主器件控制（片选线）NSS信号线由高变低，是SPI通讯的起始信号。NSS信号由低变高，是SPI通讯的停止信号。</li>
+<li>时钟线：SCL：时钟信号，由主器件产生</li>
+<li>串行输出数据线：MOSI：主器件数据输出(写)，从器件数据输入(读)</li>
+<li>串行输入数据线：MISO：主器件数据输入，从器件数据输出</li>
+</ul>
+<p><strong>SPI优点和缺点</strong></p>
+<p>支持全双工通信、通信简单、数据传输速率快。没有指定的流控制、没有应答机制确认是否接收到数据，所以跟IIC总线协议比较在数据，可靠性上有一定的缺陷。</p>
+<p>&#x3D;&#x3D;SPI使用MOSI及MISO信号线来传输数据，使用SCK信号线进行数据同步。MOSI及MISO数据线在SCK的每个时钟周期传输一位数据，且数据输入输出是同时进行 的。SPI每次数据传输可以 8 位或 16 位为单位，每次传输的单位数不受限制。&#x3D;&#x3D;</p>
+<h4 id="4-RS232总线"><a href="#4-RS232总线" class="headerlink" title="4.RS232总线"></a>4.RS232总线</h4><p>RS-232是现在主流的串行通信接口之一。由于RS232接口标准出现较早，难免有<strong>不足之处</strong>，主要有以下四点：</p>
+<p>(1) 接口的信号电平值较高，<strong>易损坏接口电路的芯片</strong>。RS232接口任何一条信号线的电压均为负逻辑关系。即：逻辑“1”为-3—-15V；逻辑“0”：+3—+15V，噪声容限为2V。即要求接收器能识别高于+3V的信号作为逻辑“0”，低于-3V的信号作为逻辑“1”，TTL电平为5V为逻辑正，0为逻辑负。与TTL电平不兼容故需使用电平转换电路方能与TTL电路连接。</p>
+<p>(2) <strong>传输速率较低</strong>，在异步传输时，比特率为20Kbps；因此在51CPLD开发板中，综合程序波特率只能采用19200，也是这个原因。</p>
+<p>(3) 接口使用一根信号线和一根信号返回线而构成共地的传输形式，这种共地传输容易产生共模干扰，所以<strong>抗噪声干扰性弱</strong>。</p>
+<p>(4) <strong>传输距离有限</strong>。最大传输距离标准值为50英尺，实际上也只能用在15米左右。</p>
+<h4 id="5-RS485总线"><a href="#5-RS485总线" class="headerlink" title="5.RS485总线"></a>5.RS485总线</h4><p>新标准RS-485具有以下<strong>特点</strong>：</p>
+<p>(1) RS-485的电气特性：逻辑“1”以两线间的电压差+2V<del>+6V表示，逻辑“0”以两线间的电压差-6V</del>-2V表示。接口信号电平比RS-232-C降低了，就<strong>不容易损坏接口电路芯片</strong>，且该电平与TTL电平兼容，刻方便与TTL电路连接。</p>
+<p>(2) 数据<strong>最高传输速率</strong>为：10Mbps。</p>
+<p>(3) RS-485接口采用平衡驱动器和差分接收器的组合，抗共模干扰能力强，即<strong>抗噪声性能好</strong>。</p>
+<p>(4) RS-485接口的<strong>最大传输距离</strong>标准值4000英尺，实际上可达3000米。</p>
+<p>(5) RS-232-C接口在总线上只允许连接一个收发器，即单站能力；而RS-485接口在总线上只允许连接多达128个收发器，即具有<strong>多站能力</strong>，这样用户可以利用单一的RS-485接口方便地建立设备网络。</p>
+<h4 id="6-IC总线和SPI总线对比"><a href="#6-IC总线和SPI总线对比" class="headerlink" title="6.IC总线和SPI总线对比"></a>6.IC总线和SPI总线对比</h4><p><strong>相同点</strong>：均采用串行同步总线、都采用TTL电平、主从模式架构。</p>
+<p><strong>不同点</strong>：</p>
+<ul>
+<li>IIC总线为半双工通信，因为IIC总线只有一根SDA数据线。</li>
+<li>SPI总线为全双工通信，因为SPI总线有两个单向的数据线(MOSI和MISO)。</li>
+<li>IIC总线有应答信号，SPI总线没有应答信号。</li>
+<li>IIC总线通过寻址进行选择和哪一个从机进行通信。</li>
+<li>SPI总线通过片选线选择和哪一个从机进行通信，片选线向从机发送使能信号。</li>
+<li>比如说有10个从机设备，需要10根片选线，比较浪费硬件引脚资源。</li>
+<li>IIC总线通过高低电平的变化进行数据传输。</li>
+<li>SPI总线边沿触发，边沿采样。</li>
+</ul>
+<h4 id="7-RS232和RS484总线对比"><a href="#7-RS232和RS484总线对比" class="headerlink" title="7.RS232和RS484总线对比"></a>7.<strong>RS232和RS484总线对比</strong></h4><p>①<strong>工作模式：</strong>RS232 为全双工，RS485 为半双工。<br>②<strong>传输方式：</strong>RS485和RS232只是物理协议的通信（即接口标准），RS485是差分传输方式，RS232是单端传输方式，但通信程序没有太大区别。<br>③<strong>信号线：</strong>RS485接口组成的半双工网络，一般只需二根信号线。RS-232 口一般只使用 RXD、TXD、GND 三条线。<br>④<strong>抗干扰性：</strong>RS485接口是采用平衡驱动器和差分接收器的组合，抗噪声干扰性好。RS232接口使用一根信号线和一根信号返回线而构成共地的传输形式，这种共地传输容易产生共模干扰。<br>⑤<strong>传输距离：</strong>RS485接口的最大传输距离标准值为1200米(9600bps时)，实际上可达3000米。RS232传输距离有限，最大传输距离标准值为50米，实际上也只能用在15米左右。<br>⑥<strong>传输速率：</strong>RS232传输速率较低，在异步传输时，波特率为20Kbps。RS485的数据最高传输速率为10Mbps。<br>⑦<strong>电气电平值：</strong>RS485的逻辑”1”以两线间的电压差为+(2-6)V 表示；逻辑”0”以两线间的电压差为-(2-6)V表示。在 RS232中任何一条信号线的电压均为负逻辑关系，即：逻辑”1”，-(5-15)V；逻辑”0 “ +(5- 15)V 。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>1.markdown语法</title>
+    <url>/2023/08/27/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="1-markdown语法"><a href="#1-markdown语法" class="headerlink" title="1.markdown语法"></a>1.markdown语法</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#section.1">1.1快捷键</a><a name="context.1"> </a></li>
+<li><a href="#section.2">1.2文字(文本)显示</a><a name="context.2"> </a></li>
+<li><a href="#section.3">2.1无序列表</a><a name="context.3"> </a></li>
+<li><a href="#section.4">2.2有序列表</a><a name="context.4"> </a></li>
+<li><a href="#section.5">2.3任务列表</a><a name="context.5"> </a></li>
+<li><a href="#section.6">4.1行内代码</a><a name="context.6"> </a></li>
+<li><a href="#section.7">4.2代码块</a><a name="context.7"> </a></li>
+</ul>
+<hr>
+<h2 id="1-1快捷键"><a href="#1-1快捷键" class="headerlink" title="1.1快捷键 "></a><a href="#context.1">1.1快捷键</a><a name="section.1"> </a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>语法</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标题</td>
+<td>用#表示，#一级标题，##二级标题，以此类推</td>
+<td>ctrl+1&#x2F;2&#x2F;3&#x2F;4     ctrl+0快速将文本调整成普通文本     ctrl+加号&#x2F;减号对标题级别进行加减</td>
+</tr>
+<tr>
+<td>字体加粗</td>
+<td>用** **包裹起来</td>
+<td>ctrl+B</td>
+</tr>
+<tr>
+<td>斜体字</td>
+<td>用* *包裹起来</td>
+<td>ctrl+L</td>
+</tr>
+<tr>
+<td>加粗斜体</td>
+<td>用*** ***包裹起来</td>
+<td>ctrl+B  &#x2F; ctrl+L</td>
+</tr>
+<tr>
+<td>删除线</td>
+<td>用~~ ~~ 包裹起来</td>
+<td>shift+atl+5</td>
+</tr>
+<tr>
+<td>下划线</td>
+<td>用<u> <u>包裹起来</td>
+<td>ctrl+U</td>
+</tr>
+<tr>
+<td>引用</td>
+<td>在文字开头添加&gt;表示引用说明</td>
+<td>ctrl+Q</td>
+</tr>
+<tr>
+<td>高亮</td>
+<td>用&#x3D;&#x3D; &#x3D;&#x3D;包裹起来</td>
+<td>无快捷键</td>
+</tr>
+<tr>
+<td>插入表格</td>
+<td></td>
+<td>ctrl+T</td>
+</tr>
+<tr>
+<td>在表格下方插入一行</td>
+<td></td>
+<td>ctrl+enter</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="1-2文字-文本-显示"><a href="#1-2文字-文本-显示" class="headerlink" title="1.2文字(文本)显示 "></a><a href="#context.2">1.2文字(文本)显示</a><a name="section.2"> </a></h2><ol>
+<li>上下标：</li>
+</ol>
+<p>​     <code>x^2^</code></p>
+<p>​    <code>H~2~O</code></p>
+<p>效果：</p>
+<p>​    x^2^</p>
+<p>   H<del>2</del>O</p>
+<p>2.文本居中</p>
+<p>代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;center&gt;内容&lt;/kbd&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<center>内容</kbd>
+
+<p>3.快捷键显示<br>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;kbd&gt;内容&lt;/kbd&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br><kbd>内容</kbd></p>
+<p>4.加粗<br>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;b&gt;加粗&lt;/b&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br><b>加粗</b></p>
+<p>4.倾斜<br>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;i&gt;倾斜&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果：<i>倾斜</i></p>
+<p>5.上下标<br>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开始&lt;sup&gt;123hi你好&lt;/sup&gt;</span><br><span class="line">开始&lt;sub&gt;321hi你好&lt;/sub&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br>开始<sup>123hi你好</sup><br>开始<sub>321hi你好</sub></p>
+<h1 id="2-列表"><a href="#2-列表" class="headerlink" title="2.列表"></a>2.列表</h1><h2 id="2-1无序列表"><a href="#2-1无序列表" class="headerlink" title="2.1无序列表 "></a><a href="#context.3">2.1无序列表</a><a name="section.3"> </a></h2><p>代码：</p>
+<p> <code>*/-/+ + 空格</code></p>
+<p>效果：</p>
+<p>1.只有同一级别：</p>
+<ul>
+<li><p>1</p>
+</li>
+<li><p>2</p>
+</li>
+<li><p>3</p>
+<p>  2.子集类</p>
+<ul>
+<li>1<ul>
+<li>2<ul>
+<li>3</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>  快捷键：ctrl+shift+]</p>
+</li>
+</ul>
+<h2 id="2-2有序列表"><a href="#2-2有序列表" class="headerlink" title="2.2有序列表 "></a><a href="#context.4">2.2有序列表</a><a name="section.4"> </a></h2><p>代码：</p>
+<p><code>数字+.+空格</code></p>
+<p>效果：</p>
+<ol>
+<li><p>第一个标题</p>
+</li>
+<li><p>第二个标题</p>
+</li>
+<li><p>第三个标题</p>
+<ul>
+<li>子内容1</li>
+<li>子内容2</li>
+</ul>
+</li>
+<li><p>第四个标题<br> 快捷键为ctrl+shift+[</p>
+</li>
+</ol>
+<h2 id="2-3任务列表"><a href="#2-3任务列表" class="headerlink" title="2.3任务列表 "></a><a href="#context.5">2.3任务列表</a><a name="section.5"> </a></h2><pre><code>代码：
+
+`- [ ]吃早饭`
+
+`- [x]背单词`
+效果：
+
+- [ ] 吃早饭
+
+- [ ] 背单词
+</code></pre>
+<p>快捷键：ctrl+shift+x</p>
+<h1 id="3-区块显示"><a href="#3-区块显示" class="headerlink" title="3.区块显示"></a>3.区块显示</h1><p>代码：</p>
+<p><code>&gt;+回车</code></p>
+<p>效果：</p>
+<blockquote>
+<p>这是最外层代码块</p>
+<blockquote>
+<p>这是内层代码块</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这是最内层代码块</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="代码显示"><a href="#代码显示" class="headerlink" title="代码显示"></a>代码显示</h1><h2 id="4-1行内代码"><a href="#4-1行内代码" class="headerlink" title="4.1行内代码 "></a><a href="#context.6">4.1行内代码</a><a name="section.6"> </a></h2><p>代码：</p>
+<p><code>int a=0;</code></p>
+<p>快捷键：ctrl+shift+&#96;</p>
+<h2 id="4-2代码块"><a href="#4-2代码块" class="headerlink" title="4.2代码块 "></a><a href="#context.7">4.2代码块</a><a name="section.7"> </a></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输出 cout</span><br><span class="line">//输入 cin</span><br></pre></td></tr></table></figure>
+
+<p>快捷键：ctrl+shift+K</p>
+<h1 id="5-链接"><a href="#5-链接" class="headerlink" title="5.链接"></a>5.链接</h1><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www.baidu,com</span><br><span class="line">[百度](https://www.baidu.com)</span><br><span class="line">[百度])(https://www.baidu.com &quot;https://www.baidu.com&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br><a href="https://www.baidu.com/">百度</a><br>[百度])(<a href="https://www.baidu.com/">https://www.baidu.com</a> “<a href="https://www.baidu.com/">https://www.baidu.com</a>“)</p>
+<h1 id="6-脚注"><a href="#6-脚注" class="headerlink" title="6.脚注"></a>6.脚注</h1><p>对文本进行解释说明<br>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[^文本]</span><br><span class="line">[^文本]：解释说明</span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p>​    c++<a href="%E8%BF%99%E6%98%AF%E4%B8%80%E7%A7%8D%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">^①</a></p>
+<p>c<a href="%E8%BF%99%E6%98%AF%E4%B8%80%E7%A7%8D%E7%AE%80%E5%8D%95%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">^②</a></p>
+<h1 id="7-插入图片"><a href="#7-插入图片" class="headerlink" title="7.插入图片"></a>7.插入图片</h1><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![不显示的文字]（图片路径 &quot;图片标题&quot;）</span><br></pre></td></tr></table></figure>
+
+
+<p>效果：<img src="/"></p>
+<p>快捷键：ctrl+shift+I</p>
+<h1 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h1><p>快捷键：</p>
+<p>插入表格：ctrl+T<br>在最后一行添加一行表格：ctrl+enter<br>在一行表格里面再添加一行：shift+enter</p>
+<h1 id="9-流程图"><a href="#9-流程图" class="headerlink" title="9.流程图"></a>9.流程图</h1><h1 id="10-表情符号"><a href="#10-表情符号" class="headerlink" title="10.表情符号"></a>10.表情符号</h1><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:happy: /:cry: /:man:</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br>:happy: &#x2F;:cry: &#x2F;:man:</p>
+]]></content>
+      <categories>
+        <category>星海</category>
+      </categories>
+      <tags>
+        <tag>星海</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>芯片选型考虑哪些因素？</title>
+    <url>/2023/08/27/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%87/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="芯片选型考虑哪些因素？"><a href="#芯片选型考虑哪些因素？" class="headerlink" title="芯片选型考虑哪些因素？"></a>芯片选型考虑哪些因素？</h2><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#section.1">STM32F4和F1的区别，为什么选用F4？</a><a name="context.1"> </a></li>
+<li><a href="#section.2">STM32启动过程：</a><a name="context.2"> </a></li>
+<li><a href="#section.3">stm32的定时器</a><a name="context.3"> </a></li>
+<li><a href="#section.4">stm32的AD采样</a><a name="context.4"> </a></li>
+<li><a href="#section.5">Linux嵌入式和单片机嵌入式区别：</a><a name="context.5"> </a></li>
+<li><a href="#section.6">FreeRTOS、μC&#x2F;OS的区别</a><a name="context.6"> </a></li>
+<li><a href="#section.7">在RTOS中，二值信号量和互斥量的区别？</a><a name="context.7"> </a></li>
+<li><a href="#section.8">在RTOS中，任务通知的运行机制是怎么样的？</a><a name="context.8"> </a></li>
+<li><a href="#section.9">UCOS任务调度</a><a name="context.9"> </a></li>
+<li><a href="#section.10">UCOS中任务间的通信</a><a name="context.10"> </a></li>
+<li><a href="#section.11">STM32 中断是怎么进入到中断服务程序的</a><a name="context.11"> </a></li>
+<li><a href="#section.12">UCOS中断处理过程</a><a name="context.12"> </a></li>
+<li><a href="#section.13">DMA有什么用</a><a name="context.13"> </a></li>
+<li><a href="#section.14">处理器与外部设备通信的两种方式</a><a name="context.14"> </a></li>
+<li><a href="#section.15">串行通信的通信方式</a><a name="context.15"> </a></li>
+<li><a href="#section.16">串行通信分为</a><a name="context.16"> </a></li>
+<li><a href="#section.17">Modbus通讯协议</a><a name="context.17"> </a></li>
+<li><a href="#section.18">485通讯的原理</a><a name="context.18"> </a></li>
+<li><a href="#section.19">RS485和RS232的区别</a><a name="context.19"> </a></li>
+<li><a href="#section.20">串口通信协议UART</a><a name="context.20"> </a></li>
+<li><a href="#section.21">串口异步通信</a><a name="context.21"> </a></li>
+<li><a href="#section.22">SPI（串行外围设备接口）</a><a name="context.22"> </a></li>
+<li><a href="#section.23">SPI是什么？有几条线？几种模式？</a><a name="context.23"> </a></li>
+<li><a href="#section.24">IIC</a><a name="context.24"> </a></li>
+<li><a href="#section.25">CAN通信介绍</a><a name="context.25"> </a></li>
+<li><a href="#section.26">传输速度</a><a name="context.26"> </a></li>
+</ul>
+<hr>
+<ol>
+<li>性能：确保芯片具有足够的处理能力来满足项目需求。</li>
+<li>内存：选择具有足够RAM和ROM（或Flash）容量的芯片。</li>
+<li>能耗：根据项目要求，权衡功耗和性能。</li>
+<li>外设和接口：选择支持所需通信协议和设备连接的芯片。</li>
+<li>封装和尺寸：考虑空间限制和生产要求，选择合适的封装类型。</li>
+<li>开发工具和支持：选用具有良好文档和支持的芯片，降低开发难度。</li>
+<li>供应和成本：确保稳定供应并选择性价比合适的芯片。</li>
+<li>软件和生态系统：选择具有成熟软件支持和丰富生态系统的芯片。</li>
+<li>安全性：根据项目要求，选择具有相应安全功能的芯片。</li>
+<li>可扩展性：选择具有一定可扩展性和升级能力的芯片，以适应项目需求变化。</li>
+</ol>
+<h2 id="STM32F4和F1的区别，为什么选用F4？"><a href="#STM32F4和F1的区别，为什么选用F4？" class="headerlink" title="STM32F4和F1的区别，为什么选用F4？ "></a><a href="#context.1">STM32F4和F1的区别，为什么选用F4？</a><a name="section.1"> </a></h2><p>内核不同：F1是Cortex-M3内核，F4是Cortex-M4内核；</p>
+<p>主频不同：F1主频72MHz，F4主频168MHz；</p>
+<p>浮点运算：F1无浮点运算单位没有硬件FPU处理浮点数运算，F4有；</p>
+<p>（没有浮点加速硬件FPU只影响浮点计算的速度，并不是不能计算浮点数，因此只能通过内核的软件进行计算。先要把这个浮点数运算转换成定点数存储，再把这个定点数转换成指数的方式进行运算，不仅中间要进行数据转换，并且要进行多次移位，而整数型就不需要这么复杂的操作，直接运算就可以，所以F1浮点数运算不仅运算量大并且会加大MCU的负载，要慢很多）</p>
+<p>功能性能：F4外设比F1丰富且功能更强大，比如GPIO翻转速率、上下拉电阻配置、ADC精度等；</p>
+<p>内存大小：F1内部SRAM最大64K，F4有192K(112+64+16)。</p>
+<p>F4的RAM和ROM：ram192K，rom大小2048K</p>
+<p>考虑到需要浮点运算和使用RTOS系统，最后选择F4；</p>
+<h2 id="STM32启动过程："><a href="#STM32启动过程：" class="headerlink" title="STM32启动过程： "></a><a href="#context.2">STM32启动过程：</a><a name="section.2"> </a></h2><ol>
+<li>复位向量表（Reset Vector Table）：在STM32微控制器中，复位向量表是一个存储器区域，其中包含了处理器在复位时跳转执行的第一条指令的地址。通常，复位向量表位于存储器的起始地址，由芯片制造商预先定义。复位向量表的内容包括复位中断处理函数、中断向量表和其他初始化函数。</li>
+<li>处理器复位：当STM32芯片上电或者外部复位信号触发时，处理器的复位引脚将会被拉低，导致处理器执行复位操作。在复位期间，处理器会将各个寄存器的值初始化为默认值，并开始执行复位向量表中的第一条指令。</li>
+<li>系统初始化：复位向量表中的第一条指令通常是一条跳转指令，将控制权转移到系统初始化函数的地址上。系统初始化函数主要用于设置处理器和系统的一些基本配置，例如时钟源和时钟频率的配置，初始化堆栈指针、全局变量等。</li>
+<li>C库初始化：在系统初始化完成后，通常会调用C库的初始化函数。C库的初始化函数主要是对C语言运行环境的初始化，包括清零BSS段（未初始化的全局变量）、复制数据段（初始化的全局变量）等。</li>
+<li>主函数入口：C库初始化完成后，处理器将跳转到主函数的入口地址开始执行用户程序。主函数是程序的入口点，其中包含应用程序的具体逻辑。</li>
+</ol>
+<p>需要注意的是，上述步骤是一般情况下的启动流程，具体的启动过程可能会因不同的芯片型号、启动模式和编译器设置而有所差异。此外，还可以通过修改复位向量表的内容来实现特定的启动操作，例如自定义复位中断处理函数或添加其他初始化函数。</p>
+<h2 id="stm32的定时器"><a href="#stm32的定时器" class="headerlink" title="stm32的定时器 "></a><a href="#context.3">stm32的定时器</a><a name="section.3"> </a></h2><p>提问定时器相关的，具体根据你个人开发使用情况解答。</p>
+<ol>
+<li>定时器时钟使能：首先，需要使能所需的定时器时钟。这可以通过RCC（Reset and Clock Control）寄存器来配置。例如，如果要使用TIM2定时器，需要使能TIM2的时钟。</li>
+<li>定时器配置：配置定时器的基本参数，例如计数器的工作模式、时钟分频系数、计数器的自动重载值等。这些配置可以通过定时器的相关寄存器进行设置。</li>
+<li>定时器中断设置（可选）：如果需要使用定时器中断，可以配置中断源和中断优先级，并使能定时器中断。</li>
+<li>启动定时器：配置完成后，启动定时器开始计数。定时器可以通过软件触发或外部触发来启动计数。</li>
+<li>定时器中断处理（可选）：如果配置了定时器中断，当计数器达到设定的值时，会触发中断。在中断服务程序中可以执行相应的操作，例如更新计数器的值、处理中断标志等。</li>
+</ol>
+<h2 id="stm32的AD采样"><a href="#stm32的AD采样" class="headerlink" title="stm32的AD采样 "></a><a href="#context.4">stm32的AD采样</a><a name="section.4"> </a></h2><p>提问AD采样相关的，具体根据你个人开发使用情况解答。</p>
+<ol>
+<li>ADC配置：首先，需要配置ADC模块的相关寄存器，包括时钟使能、采样时间、采样通道等。这些配置可以通过寄存器操作或者使用STM32提供的库函数进行设置。</li>
+<li>GPIO配置：为了使用ADC，需要将相应的GPIO引脚配置为模拟输入模式，并使能相应的ADC通道。这可以通过配置GPIO寄存器来完成。</li>
+<li>触发方式设置：可以选择触发ADC转换的方式，例如软件触发或外部触发。如果选择外部触发，还需要配置相关的触发源和极性。</li>
+<li>ADC转换：在进行ADC转换之前，可以设置ADC分辨率、对齐方式、连续转换模式等。然后，可以通过启动转换命令或触发源来开始ADC转换。</li>
+<li>中断或轮询获取结果：可以选择使用中断或轮询的方式获取ADC转换结果。如果使用中断方式，可以在转换完成后触发中断，并在中断服务程序中读取转换结果。如果使用轮询方式，则需要在转换完成后主动查询并读取转换结果。</li>
+<li>结果处理：获取到ADC转换结果后，可以根据需要进行相应的处理，例如数据转换、单位换算等。</li>
+</ol>
+<h2 id="Linux嵌入式和单片机嵌入式区别："><a href="#Linux嵌入式和单片机嵌入式区别：" class="headerlink" title="Linux嵌入式和单片机嵌入式区别： "></a><a href="#context.5">Linux嵌入式和单片机嵌入式区别：</a><a name="section.5"> </a></h2><p>复杂性：Linux嵌入式系统是基于Linux内核构建的，具有完整的操作系统功能，包括多任务处理、文件系统、网络协议等。相比之下，单片机嵌入式系统通常使用裸机编程或者实时操作系统（RTOS），具有更简单的系统结构和功能。</p>
+<p>处理能力：Linux嵌入式系统通常在较强大的处理器上运行，例如ARM、x86等，具备较高的处理能力和存储容量。而单片机嵌入式系统使用单片机芯片，其处理能力和存储容量较低。</p>
+<p>开发环境：Linux嵌入式系统使用标准的开发工具链和开发环境，可以使用高级编程语言（如C&#x2F;C++）进行开发，并且具备广泛的软件支持和开发社区。单片机嵌入式系统的开发通常需要使用特定的单片机编程工具和汇编语言，开发资源相对较少。</p>
+<p>系统定制性：Linux嵌入式系统具有很高的可定制性，可以根据应用需求选择所需的软件组件和功能，并且支持模块化的软件开发和更新。单片机嵌入式系统的定制性相对较低，往往需要在设计阶段确定所需功能和硬件配置。</p>
+<p>成本和功耗：Linux嵌入式系统由于使用较高性能的处理器和较大容量的存储器，相对而言成本较高，并且功耗较高。单片机嵌入式系统由于采用低成本、低功耗的单片机芯片，成本较低且功耗较低。</p>
+<p>总的来说，Linux嵌入式系统适用于需要复杂功能、较高性能和较大存储容量的应用，如智能手机、平板电脑、网络设备等。而单片机嵌入式系统适用于资源有限、功耗要求低、对实时性要求较高的应用，如传感器、家电、汽车电子等。</p>
+<h2 id="FreeRTOS、μC-OS的区别"><a href="#FreeRTOS、μC-OS的区别" class="headerlink" title="FreeRTOS、μC&#x2F;OS的区别 "></a><a href="#context.6">FreeRTOS、μC&#x2F;OS的区别</a><a name="section.6"> </a></h2><p>开源性质：FreeRTOS是一个开源的RTOS，可以免费获取并在商业和非商业项目中使用。它具有广泛的用户社区和支持。而μC&#x2F;OS是一种商业RTOS，需要购买许可证才能使用。</p>
+<p>架构和内核：FreeRTOS采用基于优先级的抢占式内核架构，支持多任务处理、时间片轮转调度和中断服务机制。它提供了一套轻量级的内核函数和任务管理机制。μC&#x2F;OS也是基于优先级的抢占式内核，但它提供了更多的功能，如事件标志、信号量、消息邮箱等，以满足更复杂的应用需求。</p>
+<p>资源占用：FreeRTOS的内核非常小巧，具有低的存储器占用和快速的上下文切换速度，适用于资源有限的嵌入式系统。μC&#x2F;OS相对而言具有更大的内核代码大小和更高的存储器占用，但它提供了更丰富的功能和可选组件。</p>
+<p>硬件平台支持：FreeRTOS在多种处理器架构上都有支持，包括ARM、MIPS、x86等，因此它适用于广泛的硬件平台。μC&#x2F;OS也支持多种处理器架构，但支持的硬件平台较少，且主要集中在微控制器和嵌入式系统上。</p>
+<p>社区支持和生态系统：由于FreeRTOS的开源性质，它具有庞大的用户社区和广泛的生态系统，提供了丰富的示例代码、开发工具和支持资源。μC&#x2F;OS作为商业RTOS，其用户社区和生态系统相对较小，但有专门的技术支持和服务。</p>
+<h2 id="在RTOS中，二值信号量和互斥量的区别？"><a href="#在RTOS中，二值信号量和互斥量的区别？" class="headerlink" title="在RTOS中，二值信号量和互斥量的区别？ "></a><a href="#context.7">在RTOS中，二值信号量和互斥量的区别？</a><a name="section.7"> </a></h2><p>二值信号量是一种计数器，只有两种状态：0和1。当一个任务试图获取一个已经被获取的二值信号量时，该任务会被挂起，直到该信号量被释放为止。二值信号量通常用于同步任务的开始或者结束，或者是保护共享资源的读写等。由于二值信号量不具有优先级继承功能，当高优先级任务等待低优先级任务释放二值信号量时，低优先级任务可能会优先执行，导致任务调度出现问题。</p>
+<p>互斥量也是一种计数器，但它具有更多的状态。当一个任务获取一个已经被获取的互斥量时，该任务会被挂起，并且该互斥量的计数器会减一。只有当计数器归零时，该互斥量才会被释放。互斥量通常用于保护共享资源的读写等，它具有优先级继承功能，可以避免高优先级任务因为等待低优先级任务释放互斥量而被阻塞的问题。</p>
+<h2 id="在RTOS中，任务通知的运行机制是怎么样的？"><a href="#在RTOS中，任务通知的运行机制是怎么样的？" class="headerlink" title="在RTOS中，任务通知的运行机制是怎么样的？ "></a><a href="#context.8">在RTOS中，任务通知的运行机制是怎么样的？</a><a name="section.8"> </a></h2><ol>
+<li>发送任务向接收任务发送通知，通知包括通知值和接收任务的句柄。</li>
+<li>接收任务准备好接收通知，并在等待通知列表中等待通知的到来。</li>
+<li>发送任务调用发送通知的API函数，RTOS将通知保存到接收任务的等待通知列表中。</li>
+<li>如果接收任务已经准备好接收通知，那么RTOS会将该任务从等待通知列表中移除，并唤醒该任务继续执行。</li>
+<li>如果接收任务没有准备好接收通知，那么该任务会继续等待，直到接收任务准备好接收通知。</li>
+</ol>
+<h2 id="UCOS任务调度"><a href="#UCOS任务调度" class="headerlink" title="UCOS任务调度 "></a><a href="#context.9">UCOS任务调度</a><a name="section.9"> </a></h2><p>一个任务，也称作一个线程。</p>
+<p>UCOS有一个任务调度机制，根据任务的优先级进行调度。</p>
+<p>一个是硬件中断， 那么系统会将当前任务有关变量入栈，然后执行中断服务程序，执行完成后出栈返回.</p>
+<p>另一个是任务之间的切换，使用的方法就是任务调度，每一个任务有自己的栈，顺度也是一样的入栈，然后执行另一个程序，然后出线返回。</p>
+<p>并非是每一任务按优先级顺序轮流执行的，而是高优先级的任务独占运行，除非其主动放弃执行，否则低优先级任务不能抢占，同时高优先级可以把放出去给低优先级任务使用的CPU占用权抢回来。所以UCOS的任务间要注意插入等待延时，以便UCOS切出去让低优先级任务执行。</p>
+<h2 id="UCOS中任务间的通信"><a href="#UCOS中任务间的通信" class="headerlink" title="UCOS中任务间的通信 "></a><a href="#context.10">UCOS中任务间的通信</a><a name="section.10"> </a></h2><p>在UCOS中，是使用信号量、邮箱（消息邮箱）和消息队列这些被称作事件的中间环节来实现任务间的通信的，还有全局变量。</p>
+<p>信号量用于：</p>
+<p>1.控制共享资源的使用权（满足互斥条件）</p>
+<p>2.标志某时间的发生</p>
+<p>3.使2个任务的行为同步</p>
+<p>消息队列：</p>
+<p>概念：</p>
+<p>（1）消息队列实际上就是邮箱阵列。</p>
+<p>（2）任务和中断都可以将一则消息放入队列中，任务可以从消息队列中获取消息。</p>
+<p>（3）先进入队列的消息先传给任务(FIFO)。</p>
+<p>（4）每个消息队列有一张等待消息任务的等待列表，如果消息列中没有消息，则等待消息的任务就被挂起，直到消息到来。</p>
+<h2 id="STM32-中断是怎么进入到中断服务程序的"><a href="#STM32-中断是怎么进入到中断服务程序的" class="headerlink" title="STM32 中断是怎么进入到中断服务程序的 "></a><a href="#context.11">STM32 中断是怎么进入到中断服务程序的</a><a name="section.11"> </a></h2><p>在STM32中，中断服务程序是通过中断向量表来实现的。中断向量表是一个包含中断处理程序入口地址的表格，每个中断都有一个对应的中断向量，当该中断发生时，CPU会根据中断向量表找到该中断对应的中断处理程序入口地址，并跳转到该地址执行中断处理程序。</p>
+<p>中断向量表的起始地址位于STM32的Flash或者SRAM中，中断向量表的长度是固定的，每个中断向量都包含了该中断的中断处理程序入口地址。</p>
+<p>当中断发生时，STM32的CPU会保存当前执行的上下文，包括程序计数器（PC）和其他寄存器等，然后根据中断向量表找到该中断对应的中断处理程序入口地址，并跳转到该地址执行中断服务程序。中断服务程序执行完成后，CPU会根据保存的上下文恢复现场，并返回到中断发生前的执行位置继续执行。</p>
+<h2 id="UCOS中断处理过程"><a href="#UCOS中断处理过程" class="headerlink" title="UCOS中断处理过程 "></a><a href="#context.12">UCOS中断处理过程</a><a name="section.12"> </a></h2><p>中断是一个硬件机制，主要用来向CPU通知一个异步事件发生了，这时CPU就会将当前CPU寄存器值入栈，然后转而执行中断服务程序，在CPU执行中断服务程序的时候可能有更高优先级的任务就绪，那么当退出中断服务程序的时候，CPU就会直接执行这个高优先级的任务。</p>
+<p>UCOS是支持中断嵌套的，既高优先级的中断可以打断低优先级的中断，使用OSIntNestingCtr来记录中断嵌套次数，最大支持250级的中断嵌套。进去+1，退出-1。</p>
+<p>在OSIntEnter()和OSIntExit()记录</p>
+<h2 id="DMA有什么用"><a href="#DMA有什么用" class="headerlink" title="DMA有什么用 "></a><a href="#context.13">DMA有什么用</a><a name="section.13"> </a></h2><p>DMA（Direct Memory Access，直接内存访问）是一种数据传输技术，它允许某些硬件子系统（例如外设控制器、IO设备等）直接在内存和外设之间传输数据，而无需CPU的干预。这样可以减轻CPU的负担，提高系统性能。</p>
+<p>DMA的主要用途如下：</p>
+<ol>
+<li>减轻CPU负担：通过直接在内存和外设之间传输数据，DMA可以减少CPU的工作量，让CPU专注于其他任务或进入低功耗状态。</li>
+<li>提高数据传输速率：DMA通常能实现较高的数据传输速率，因为它绕过了CPU并直接访问内存，从而减少了延迟和额外的开销。</li>
+<li>实现实时数据传输：DMA可以实现更高的实时性，因为它可以在规定的时间内完成数据传输，而不会受到CPU其他任务的影响。</li>
+<li>节省功耗：通过减少CPU参与数据传输的次数，DMA可以降低系统功耗，特别是在低功耗设备或电池供电设备中。</li>
+</ol>
+<p>DMA常用于以下场景：</p>
+<ol>
+<li>高速数据传输：例如，硬盘控制器、网络接口卡、音频设备等需要高速数据传输的应用。</li>
+<li>数据采集：例如，模数转换器（ADC）、数模转换器（DAC）等需要实时采集或输出数据的设备。</li>
+<li>图形处理：例如，图形处理器（GPU）在处理大量图像数据时，可以使用DMA加速数据传输。</li>
+<li>嵌入式系统：在嵌入式系统中，DMA可以用于减轻CPU负担，提高系统响应速度和性能。</li>
+</ol>
+<h2 id="处理器与外部设备通信的两种方式"><a href="#处理器与外部设备通信的两种方式" class="headerlink" title="处理器与外部设备通信的两种方式 "></a><a href="#context.14">处理器与外部设备通信的两种方式</a><a name="section.14"> </a></h2><p>1） 并行通信：数据各个位同时传输、速度较快、占用引脚资源多</p>
+<p>2） 串行通信：数据按位顺序传输、速度较慢、占用引脚资源少</p>
+<h2 id="串行通信的通信方式"><a href="#串行通信的通信方式" class="headerlink" title="串行通信的通信方式 "></a><a href="#context.15">串行通信的通信方式</a><a name="section.15"> </a></h2><p>1） 同步通信：带时钟同步信号传输，SPI（全双工）、I2C（半双工）</p>
+<p>2） 异步通信：不带时钟同步信号，UART（全双工）、单总线（半双工）</p>
+<h2 id="串行通信分为"><a href="#串行通信分为" class="headerlink" title="串行通信分为 "></a><a href="#context.16">串行通信分为</a><a name="section.16"> </a></h2><p>1） 单工：数据传输只支持数据在一个方向上传输</p>
+<p>2） 半双工：允许数据在两个方向上传输，但在某一时刻只允许数据在一个方向上传输</p>
+<p>3） 全双工：允许数据同时在两个方向上传输，要求收发设备都有独立的接收、发送能力</p>
+<h2 id="Modbus通讯协议"><a href="#Modbus通讯协议" class="headerlink" title="Modbus通讯协议 "></a><a href="#context.17">Modbus通讯协议</a><a name="section.17"> </a></h2><p>Modbus协议使用的是主从通讯技术，即由主设备主动查询和操作从站设备。</p>
+<p>其通信遵循以下的过程：</p>
+<ul>
+<li>主设备向从设备发送请求</li>
+<li>从设备分析并处理主设备的请求，然后向主设备发送结果</li>
+<li>如果出现任何差错，从设备将返回一个异常功能码</li>
+</ul>
+<p>Modbus协议的报文（或帧）的基本格式是：</p>
+<p>功能码和数据区在不同类型的网络都是固定不变的，表头和校验码则因网络底层的实现方式不同而有所区别。表头包含了从站的地址，功能码告诉从站要执行何种功能，数据区是具体的信息。</p>
+<p>Modbus有下列三种通信方式：</p>
+<p>（1）以太网：对应的通信模式是</p>
+<p>（2）异步串行传输（各种介质如有线RS-232-&#x2F;422&#x2F;485&#x2F;；光纤、无线等）：对应的通信模式是Modbus RTU 或 Modbus ASCII</p>
+<p>（3）高速令牌传递网络：对应的通信模式是Modbus PLUS</p>
+<h2 id="485通讯的原理"><a href="#485通讯的原理" class="headerlink" title="485通讯的原理 "></a><a href="#context.18">485通讯的原理</a><a name="section.18"> </a></h2><ol>
+<li>物理层：485通讯使用两根信号线，分别为A线和B线，以及一个共享的地线（GND）。A线和B线分别用于发送和接收数据，可以进行全双工通信。在通讯过程中，A线和B线的电平可以相互翻转，用来表示不同的逻辑状态，如高电平表示逻辑”1”，低电平表示逻辑”0”。</li>
+<li>差分信号：485通讯采用差分信号传输，即在A线和B线之间的电压差（差分电平）来表示数据。发送端根据要发送的数据，将A线和B线上的电平进行翻转，形成一个差分信号，接收端根据电压差的大小来判断接收到的数据是逻辑”1”还是逻辑”0”。</li>
+<li>驱动能力：485通讯使用驱动能力较强的驱动器芯片，能够提供足够的电流来驱动长距离的传输线路。这使得485通讯可以在远距离的环境中进行数据传输，通常可以覆盖数千米的传输距离。</li>
+<li>数据帧格式：485通讯中的数据通常以数据帧的形式进行传输。一般包括起始位（Start Bit）、数据位（Data Bits）、校验位（Parity Bit）和停止位（Stop Bit）。起始位和停止位用于标识数据帧的开始和结束，数据位用于携带实际的数据，校验位用于检测数据传输的错误。</li>
+<li>通讯模式：485通讯可以进行点对点通讯或多点通讯。在点对点通讯中，一个发送器和一个接收器直接进行通讯。在多点通讯中，多个设备可以通过一个共享的总线进行通讯，通过给每个设备分配不同的地址来实现数据的选择性接收。</li>
+</ol>
+<h2 id="RS485和RS232的区别"><a href="#RS485和RS232的区别" class="headerlink" title="RS485和RS232的区别 "></a><a href="#context.19">RS485和RS232的区别</a><a name="section.19"> </a></h2><ol>
+<li>通信方式：RS232：RS232是一种点对点通信方式，即一对发送器和接收器之间进行直接通信。只有一个发送器和一个接收器参与通信。RS485：RS485是一种多点通信方式，可以在一个总线上连接多个发送器和接收器，实现多个设备之间的通信。</li>
+<li>信号电平：RS232：RS232使用负逻辑电平表示逻辑“1”（-3V至-15V）和正逻辑电平表示逻辑“0”（+3V至+15V）。RS485：RS485使用差分信号传输，即A线和B线之间的电压差表示数据。电平差分范围可以根据需要调整，一般为-7V至-12V表示逻辑“1”和+7V至+12V表示逻辑“0”。</li>
+<li>传输距离：RS232：RS232通常适用于短距离通信，最常见的距离为15米左右。RS485：RS485具有较强的驱动能力，能够支持长距离通信，一般可达数千米，这使得它适用于工业环境中的长距离通信需求。</li>
+<li>多点通信：RS232：由于是点对点通信，RS232通常无法实现多个设备之间的直接通信。如果需要多点通信，需要采用额外的协议或设备。RS485：RS485支持多点通信，可以在同一总线上连接多个设备，通过为每个设备分配不同的地址来实现数据的选择性接收。</li>
+</ol>
+<h2 id="串口通信协议UART"><a href="#串口通信协议UART" class="headerlink" title="串口通信协议UART "></a><a href="#context.20">串口通信协议UART</a><a name="section.20"> </a></h2><p>UART（通用异步收&#x2F;发器）是我们单片机的串口通信接口，为全双工串行异步，UART通讯的数据包由发送设备通过自身的 TXD 接口传输到接收设备的 RXD 接口。</p>
+<p><img src="https://uploadfiles.nowcoder.com/images/20230628/993465112_1687943445277/D2B5CA33BD970F64A6301FA75AE2EB22" alt="img"></p>
+<p>在串口通讯的协议层中，规定了数据包的内容，它由起始位，主体数据，校验位以及停止位组成，通讯双方的数据包格式以及波特率要约定一致才能正常收发数据。</p>
+<p>串口设置的一般步骤可以总结为如下几个步骤：</p>
+<p>\1) 串口时钟使能，GPIO 时钟使能。</p>
+<p>\2) 设置引脚复用器映射：调用 GPIO_PinAFConfig 函数。</p>
+<p>\3) GPIO 初始化设置：要设置模式为复用功能。</p>
+<p>\4) 串口参数初始化：设置波特率，字长，奇偶校验等参数。</p>
+<p>\5) 开启中断并且初始化 NVIC，使能中断（如果需要开启中断才需要这个步骤）。</p>
+<p>\6) 使能串口。</p>
+<p>\7) 编写中断处理函数：函数名格式为 USARTxIRQHandler(x 对应串口号)。</p>
+<h2 id="串口异步通信"><a href="#串口异步通信" class="headerlink" title="串口异步通信 "></a><a href="#context.21">串口异步通信</a><a name="section.21"> </a></h2><p>起始位、数据位、奇偶校验位、停止位、波特率设置</p>
+<p><img src="https://uploadfiles.nowcoder.com/images/20230628/993465112_1687943493927/D2B5CA33BD970F64A6301FA75AE2EB22" alt="img"></p>
+<h2 id="SPI（串行外围设备接口）"><a href="#SPI（串行外围设备接口）" class="headerlink" title="SPI（串行外围设备接口） "></a><a href="#context.22">SPI（串行外围设备接口）</a><a name="section.22"> </a></h2><p>SPI（全双工同步通信）</p>
+<p>以主从方式工作，这种模式通常有一个主设备和一个或多 个从设备，需要至少4根线，它们是SDI (数据输入)、SDO (数据输出)、SCLK (时钟)、CS (片选)。</p>
+<p>\1. SDO&#x2F;MOSI – 主设备数据输出，从设备数据输入;</p>
+<p>\2. SDI&#x2F;MISO – 主设备数据输入，从设备数据输出;</p>
+<p>\3. SCLK – 时钟信号，由主设备产生;</p>
+<p>4.CS&#x2F;SS – 从设备使能信号，由主设备控制。当有多个从设备的时候，因为每个从设备上都有一个片选引脚接入到主设备机中，当我们的主设备和某个从设备通信时需要将从设备对应的片选引脚电平拉低或者是拉高。</p>
+<p>CS片选信号，由主设备控制。当有多个从设备的时候，因为每个从设备上都有一个片选引脚接入到主设备机中，当我们的主设备和某个从设备通信时将需要将从设备对应的片选引脚电平拉低或者是拉高（本设计是拉低则为选中）</p>
+<p>多从机模式：</p>
+<p>第一种多CS，每个从机都需要一条单独的SS线；第二种菊花链，在设备信号（总线信号或中断信号）以串行的方式从一个设备依次传到下一个设备，不断循环直到数据到达目标设备。</p>
+<p>SPI通讯的优势：</p>
+<ul>
+<li>全双工串行通信；</li>
+<li>高速数据传输速率。</li>
+<li>简单的软件配置；</li>
+<li>极其灵活的数据传输，不限于8位，它可以是任意大小的字；</li>
+<li>非常简单的硬件结构。从站不需要唯一地址（与I2C不同）。从机使用主机时钟，不需要精密时钟振荡器&#x2F;晶振（与UART不同）。不需要收发器（与CAN不同）。</li>
+</ul>
+<p>SPI的缺点：</p>
+<ul>
+<li>没有硬件从机应答信号（主机可能在不知情的情况下无处发送）；</li>
+<li>通常仅支持一个主设备；</li>
+<li>需要更多的引脚（与I2C不同）；</li>
+<li>没有定义硬件级别的错误检查协议；</li>
+<li>与RS-232和CAN总线相比，只能支持非常短的距离；</li>
+</ul>
+<h2 id="SPI是什么？有几条线？几种模式？"><a href="#SPI是什么？有几条线？几种模式？" class="headerlink" title="SPI是什么？有几条线？几种模式？ "></a><a href="#context.23">SPI是什么？有几条线？几种模式？</a><a name="section.23"> </a></h2><p>SPI，全称为Serial Peripheral Interface，是一种串行的通信协议，用于在单片机和外设之间进行通信。SPI协议通常用于连接低速的外设，例如存储器、传感器、显示器、通信芯片等。</p>
+<p>SPI通信需要至少四条线，包括：</p>
+<ol>
+<li>MOSI（Master Output, Slave Input）：主设备输出，从设备输入。</li>
+<li>MISO（Master Input, Slave Output）：主设备输入，从设备输出。</li>
+<li>SCLK（Serial Clock）：时钟线，由主设备控制。</li>
+<li>SS（Slave Select）：从设备选择线，由主设备控制，可以用来选择不同的从设备进行通信。</li>
+</ol>
+<p>SPI协议有四种模式，每种模式具有不同的时序和时钟极性，包括：</p>
+<ol>
+<li>模式0：时钟极性为0，时钟相位为0，数据在时钟的下降沿被采样。</li>
+<li>模式1：时钟极性为0，时钟相位为1，数据在时钟的上升沿被采样。</li>
+<li>模式2：时钟极性为1，时钟相位为0，数据在时钟的上升沿被采样。</li>
+<li>模式3：时钟极性为1，时钟相位为1，数据在时钟的下降沿被采样。</li>
+</ol>
+<p>不同的模式适用于不同的硬件设备和通信要求，需要根据具体的需求进行选择和配置。</p>
+<h2 id="IIC"><a href="#IIC" class="headerlink" title="IIC "></a><a href="#context.24">IIC</a><a name="section.24"> </a></h2><p>1.它是总线，即它可以接入多个从设备</p>
+<p>2.它只有两根线，即时钟线（SCL）,数据线（SDA）,但是它同一时间只有做发送或者接收线</p>
+<p>3.每个连接到总线的设备，都要支持IIC，即有自己的设备地址，主机就是靠这个来区别不同的设备的</p>
+<p>4.总线通过上拉电阻接到电源，即当空闲时，是高电平</p>
+<p>5.多个主机同时使用总线时，为了防止数据冲突，会利用仲裁方式决定由哪个设备占用总线。</p>
+<p>6.具有三种传输模式：标准模式传输速率为 100kbit&#x2F;s ，快速模式为 400kbit&#x2F;s ，高速模式下可达 3.4Mbit&#x2F;s，但目前大多 I2C 设备尚不支持高速模式</p>
+<p>空闲状态：I2C总线总线的SDA和SCL两条信号线同时处于高电平时，规定为总线的空闲状态。</p>
+<p>开始信号：SCL 为高电平时，SDA 由高电平向低电平跳变，开始传送数据。</p>
+<p>结束信号：SCL 为高电平时，SDA 由低电平向高电平跳变，结束传送数据。</p>
+<p>应答信号：接收数据的 IC 在接收到 8bit 数据后，向发送数据的 IC 发出特定的低电平脉冲， 表示已收到数据。(主设备在SCL线上产生每个时钟脉冲，将在SDA线上传输一个数据位，当一个字节按数据位从高位到低位的顺序传输完后，紧接着从设备将拉低SDA线，回传给主设备一个应答位（ACK），此时才认为一个字节真正的被传输完成。)</p>
+<p>CPU 向受控单元发出一个信号后，等待受控单元发出一个应答信号，CPU 接 收到应答信号后，根据实际情况作出是否继续传递信号的判断。若未收到应答信号，由判断为 受控单元出现故障。</p>
+<h2 id="CAN通信介绍"><a href="#CAN通信介绍" class="headerlink" title="CAN通信介绍 "></a><a href="#context.25">CAN通信介绍</a><a name="section.25"> </a></h2><p>CAN（Controller Area Network）通信是一种串行通信协议，其主要原理如下：</p>
+<ol>
+<li>差分传输：CAN通信采用差分传输方式，即将数据信号和参考信号相减得到差分信号进行传输，可以有效地抵消噪声干扰，提高传输质量和可靠性。</li>
+<li>帧格式：CAN通信采用基于帧的数据传输方式，每个数据帧包括了ID、数据和控制信息等多个部分。其中，ID用于区分不同的设备和数据类型，数据用于存储实际的数据信息，控制信息用于控制数据的发送和接收等操作。</li>
+<li>网络拓扑：CAN通信的网络拓扑结构可以是总线型、星型或混合型，其中最常见的是总线型拓扑结构。在总线型拓扑结构中，所有的设备都连接到同一根总线上，通过差分传输的方式进行数据交换。</li>
+<li>硬件控制：CAN通信的硬件控制主要包括时钟同步、数据帧的发送和接收、差分信号的转换和电平调整等。其中，时钟同步是保证通信数据同步的关键因素，CAN总线会在通信开始前进行同步校验以确保数据的正确性。</li>
+<li>协议控制：CAN通信的协议控制包括数据的编码和解码、数据的传输确认和错误检测等。其中，数据的编码和解码是保证数据正确传输的关键因素，通过差分传输方式进行数据传输，CAN控制器会对数据进行检验和校验等操作以确保数据的正确性。</li>
+</ol>
+<h2 id="传输速度"><a href="#传输速度" class="headerlink" title="传输速度 "></a><a href="#context.26">传输速度</a><a name="section.26"> </a></h2><p>比特率（Bit&#x2F;s）和波特率，比特率是从单位看就可以知道是指每秒传输二进制的位数，而波特率是指每秒传输的码元；这里的码元我们给具体化，大家都知道串口，他的数据以帧格式传输的，即一个起始位+8位数据位+1位奇偶位+1位结束位，那么这里时候，这11位加在一起就是一个码元。</p>
+<h1 id="cache的作用"><a href="#cache的作用" class="headerlink" title="cache的作用"></a>cache的作用</h1><p>缓存（Cache）是计算机系统中一种用于存储临时数据的高速存储器。它位于CPU和主存储器（如RAM）之间，用于加速对经常访问数据的读取和写入操作。缓存的主要作用是减少CPU与慢速存储器（如RAM）之间的速度差异，从而提高系统性能。</p>
+<h1 id="有cache的CPU上使用DMA如何保证数据的一致性"><a href="#有cache的CPU上使用DMA如何保证数据的一致性" class="headerlink" title="有cache的CPU上使用DMA如何保证数据的一致性"></a>有cache的CPU上使用DMA如何保证数据的一致性</h1><p>缓存一致性是指确保CPU通过缓存访问的数据与内存中的实际数据保持一致。如果缓存中的数据与内存中的数据不一致，可能会导致错误的计算结果或系统行为。</p>
+<p>在使用DMA时，可能会发生以下情况：</p>
+<ol>
+<li>DMA将数据写入内存，但CPU缓存中仍然保存有旧数据。</li>
+<li>CPU将数据写入缓存，但DMA从内存中读取的是旧数据。</li>
+</ol>
+<p>为了确保数据一致性，可以采取以下策略：</p>
+<ol>
+<li>缓存刷新（Cache Flushing）：在DMA传输之前或之后，可以刷新缓存，以确保内存中的数据与缓存中的数据一致。例如，在DMA写操作之后，可以将缓存中受影响的数据行（Cache Line）标记为无效，从而在下次访问时强制从内存重新加载数据；在DMA读操作之前，可以将修改过的缓存数据写回内存，以确保DMA读取到的是最新数据。</li>
+<li>缓存一致性协议（Cache Coherency Protocol）：某些处理器支持硬件缓存一致性协议，如MESI协议（Modified, Exclusive, Shared, and Invalid），用于自动维护多个缓存之间的数据一致性。这种协议可以在多核处理器或多处理器系统中使用，以便在DMA传输时自动更新相关缓存数据。</li>
+<li>无缓存访问（Uncached Access）：在某些情况下，可以将DMA操作的内存区域配置为无缓存访问，即CPU直接访问内存，而不经过缓存。这样可以避免缓存一致性问题，但可能会降低数据访问性能。</li>
+<li>使用缓冲区同步技术：某些操作系统或驱动程序可以提供缓冲区同步技术，如Linux内核中的函数，用于确保DMA操作和CPU访问之间的缓存一致性。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>星海</category>
+      </categories>
+      <tags>
+        <tag>星海</tag>
+      </tags>
+  </entry>
 </search>
