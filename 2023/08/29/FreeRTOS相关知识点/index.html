@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> MustWin</title>
+      <title>FreeRTOS相关知识点 |  MustWin</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -53,24 +53,38 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Free RTOS相关知识点"
+  id="post-FreeRTOS相关知识点"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  FreeRTOS相关知识点
+</h1>
+ 
+
+      
+    </header>
      
     <div class="article-meta">
-      <a href="/2023/08/28/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
-  <time datetime="2023-08-28T14:36:30.116Z" itemprop="datePublished">2023-08-28</time>
-</a>   
+      <a href="/2023/08/29/FreeRTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time datetime="2023-08-28T16:00:00.000Z" itemprop="datePublished">2023-08-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%98%9F%E6%B5%B7/">星海</a>
+  </div>
+  
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.6k</span>
+            <span class="post-count">4.9k</span>
         </span>
     </span>
 
@@ -79,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16 分钟</span>
+            <span class="post-count">17 分钟</span>
         </span>
     </span>
 </div>
@@ -94,7 +108,13 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="FreeRTOS相关知识点"><a href="#FreeRTOS相关知识点" class="headerlink" title="FreeRTOS相关知识点"></a>FreeRTOS相关知识点</h1><p>​    FreeRTOS支持的三种调度方式：<br>  （1）抢占式调度：主要是针对优先级不同的任务，每一个任务都有一个优先级，优先级高的任务可以抢占优先级低的任务。<br>  （2）时间片调度：主要是针对优先级相同的任务，当多个任务的优先级相同时，任务调度器会在每一个时钟节拍到的时候切换任务。         （时间片1ms）在FreeRTOS中，一个时间片就是SysTick中断周期。更改时间片的大小，可由更改滴答定时器中断周期去实现。<br>​     补充：时间片：同等优先级的任务轮流的享有相同的CPU时间。在FreeRTOS中，一个时间片就等于一个SysTick中断周期<br>  （3）协程式调度：当前执行的任务会一直执行，同时高优先级的任务不会抢占低优先级的任务。</p>
+  <span id="more"></span>
+<h1 id="FreeRTOS相关知识点"><a href="#FreeRTOS相关知识点" class="headerlink" title="FreeRTOS相关知识点"></a>FreeRTOS相关知识点</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><pre><code>  - [挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。](#section.1)&lt;a name=&quot;context.1&quot;&gt; &lt;/a&gt;
+  - [恢复：恢复被挂起的任务。==任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1==](#section.2)&lt;a name=&quot;context.2&quot;&gt; &lt;/a&gt;
+    - [FromISR：==带FromISR后缀是在中断函数中专用的API==。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。==使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。==vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。](#section.3)&lt;a name=&quot;context.3&quot;&gt; &lt;/a&gt;
+</code></pre>
+<hr>
+<p>​    FreeRTOS支持的三种调度方式：<br>  （1）抢占式调度：主要是针对优先级不同的任务，每一个任务都有一个优先级，优先级高的任务可以抢占优先级低的任务。<br>  （2）时间片调度：主要是针对优先级相同的任务，当多个任务的优先级相同时，任务调度器会在每一个时钟节拍到的时候切换任务。         （时间片1ms）在FreeRTOS中，一个时间片就是SysTick中断周期。更改时间片的大小，可由更改滴答定时器中断周期去实现。<br>​     补充：时间片：同等优先级的任务轮流的享有相同的CPU时间。在FreeRTOS中，一个时间片就等于一个SysTick中断周期<br>  （3）协程式调度：当前执行的任务会一直执行，同时高优先级的任务不会抢占低优先级的任务。</p>
 <ol>
 <li><h2 id="FreeRTOS中任务共存在四种状态："><a href="#FreeRTOS中任务共存在四种状态：" class="headerlink" title="FreeRTOS中任务共存在四种状态："></a>FreeRTOS中任务共存在四种状态：</h2></li>
 </ol>
@@ -111,7 +131,7 @@
 <li><h2 id="任务的挂起与恢复的API函数"><a href="#任务的挂起与恢复的API函数" class="headerlink" title="任务的挂起与恢复的API函数"></a>任务的挂起与恢复的API函数</h2></li>
 </ol>
 <p>  ​      三个API函数：（1）vTaskSuspend()                     ———挂起任务<br>  ​                               （2）vTaskResume()                      ———恢复被挂起的任务<br>  ​                               （3）vTaskResumeFromISR()       ———在中断中恢复被挂起的任务</p>
-<h5 id="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。"><a href="#挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。" class="headerlink" title="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。"></a>挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。</h5><h5 id="恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1"><a href="#恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1" class="headerlink" title="恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D;"></a>恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D;</h5><h6 id="FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。"><a href="#FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。" class="headerlink" title="FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。"></a>FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。</h6><p>  ​    vTaskSuspend(TaskHandle_t  vTaskSuspend) 形参为 vTaskSuspend，待挂起任务的任务句柄。注意：当传入的参数为NULL，则代表挂起任务自身（当前运行的任务）。<br>  ​    vTaskResume(TaskHandle_t  vTaskResume) 形参为vTaskResume，恢复指定任务的任务句柄。注意：任务无论被挂起多少次，只需要调用vTaskResume()恢复一次，就可以继续运行。且被恢复的任务进入到就绪态。<br>    &#x3D;&#x3D;BaseType_t&#x3D;&#x3D; xTaskResumeFromISR(TaskHandle_t  xTaskResume)  被标记的为函数的返回值类型，形参为xTaskResume，待恢复的任务句柄。返回值类型有两种：①pdTRUE ———任务恢复后需要进行任务切换 （&#x3D;&#x3D;进行任务切换的情况可能为进行抢占式调度，当前恢复的任务的优先级大于正在执行的任务的优先级&#x3D;&#x3D;）②pdFALSE———任务恢复后不需要进行任务切换。&#x3D;&#x3D;注意：中断服务程序中要调用FreeRTOS的API函数则中断优先级不能超过FreeRTOS所管理的最高优先级。&#x3D;&#x3D;</p>
+<h5 id="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。"><a href="#挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend-函数调用时需要将宏INCLUDE-vTaskSuspend-配置成1。" class="headerlink" title="挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。 "></a><a href="#context.1">挂起：挂起的任务类似暂停，可恢复（解挂）；删除任务，无法恢复。被挂起的任务绝不会得到CPU的使用权，不管该任务具有什么优先级。vTaskSuspend() 函数调用时需要将宏INCLUDE_vTaskSuspend() 配置成1。</a><a name="section.1"> </a></h5><h5 id="恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1"><a href="#恢复：恢复被挂起的任务。-任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume-函数调用时需要将宏INCLUDE-vTaskResume-配置成1" class="headerlink" title="恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D; "></a><a href="#context.2">恢复：恢复被挂起的任务。&#x3D;&#x3D;任务恢复就是让挂起的任务重新进入就绪状态，恢复的任务会保留挂起前的状态信息，在恢复时根据挂起时的状态继续运行。vTaskResume() 函数调用时需要将宏INCLUDE_vTaskResume() 配置成1&#x3D;&#x3D;</a><a name="section.2"> </a></h5><h6 id="FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。"><a href="#FromISR：-带FromISR后缀是在中断函数中专用的API-。无论调用过多少次的任务挂起vTaskSuspend-，只需要调用一次vTaskResumeFromISR-即可解挂。-使用该函数时，需要在FreeRTOSconfig-h中把INCLUDE-vTaskSuspend-和INCLUDE-vTaskResumeFromISR-都定义为1。-vTaskResumeFromISR-函数不能用于任务和中断的同步（因为中断随时可能出现）。" class="headerlink" title="FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。 "></a><a href="#context.3">FromISR：&#x3D;&#x3D;带FromISR后缀是在中断函数中专用的API&#x3D;&#x3D;。无论调用过多少次的任务挂起vTaskSuspend() ，只需要调用一次vTaskResumeFromISR()  即可解挂。&#x3D;&#x3D;使用该函数时，需要在FreeRTOSconfig.h中把INCLUDE_vTaskSuspend()和INCLUDE_vTaskResumeFromISR()  都定义为1。&#x3D;&#x3D;vTaskResumeFromISR()函数不能用于任务和中断的同步（因为中断随时可能出现）。</a><a name="section.3"> </a></h6><p>  ​    vTaskSuspend(TaskHandle_t  vTaskSuspend) 形参为 vTaskSuspend，待挂起任务的任务句柄。注意：当传入的参数为NULL，则代表挂起任务自身（当前运行的任务）。<br>  ​    vTaskResume(TaskHandle_t  vTaskResume) 形参为vTaskResume，恢复指定任务的任务句柄。注意：任务无论被挂起多少次，只需要调用vTaskResume()恢复一次，就可以继续运行。且被恢复的任务进入到就绪态。<br>    &#x3D;&#x3D;BaseType_t&#x3D;&#x3D; xTaskResumeFromISR(TaskHandle_t  xTaskResume)  被标记的为函数的返回值类型，形参为xTaskResume，待恢复的任务句柄。返回值类型有两种：①pdTRUE ———任务恢复后需要进行任务切换 （&#x3D;&#x3D;进行任务切换的情况可能为进行抢占式调度，当前恢复的任务的优先级大于正在执行的任务的优先级&#x3D;&#x3D;）②pdFALSE———任务恢复后不需要进行任务切换。&#x3D;&#x3D;注意：中断服务程序中要调用FreeRTOS的API函数则中断优先级不能超过FreeRTOS所管理的最高优先级。&#x3D;&#x3D;</p>
 <p>  ​               &#x3D;&#x3D;小知识点补充：任务优先级是数值越大优先级越高，中断优先级是数值越小优先级越高。&#x3D;&#x3D;</p>
 <ol start="5">
 <li><h2 id="中断管理"><a href="#中断管理" class="headerlink" title="中断管理"></a>中断管理</h2></li>
@@ -265,11 +285,13 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blackcatnr.github.io/2023/08/28/Free%20RTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blackcatnr.github.io/2023/08/29/FreeRTOS%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%98%9F%E6%B5%B7/" rel="tag">星海</a></li></ul>
+
     </footer>
   </div>
 
@@ -277,9 +299,9 @@
   <nav class="article-nav">
     
     
-      <a href="/2023/08/28/Protocols/" class="article-nav-link">
+      <a href="/2023/08/29/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%AB%E8%82%A1%E6%96%87/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title"></div>
+        <div class="article-nav-title">嵌入式八股文</div>
       </a>
     
   </nav>
