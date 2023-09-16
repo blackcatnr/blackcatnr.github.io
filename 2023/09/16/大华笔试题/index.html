@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> MustWin</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-大华笔试题"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/09/16/%E5%A4%A7%E5%8D%8E%E7%AC%94%E8%AF%95%E9%A2%98/" class="article-date">
+  <time datetime="2023-09-16T07:11:02.143Z" itemprop="datePublished">2023-09-16</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="大华笔试题"><a href="#大华笔试题" class="headerlink" title="大华笔试题"></a>大华笔试题</h1><h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><ol>
+<li></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> a =[]()</span></span></span><br><span class="line"><span class="params"><span class="function"> &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">     <span class="type">static</span> <span class="type">int</span> b = <span class="number">1</span>;</span></span></span><br><span class="line"><span class="params"><span class="function">     <span class="keyword">return</span> b++;</span></span></span><br><span class="line"><span class="params"><span class="function">           </span></span></span><br><span class="line"><span class="params"><span class="function"> &#125;())</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">std::cout &lt;&lt; a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">f</span>();</span><br><span class="line">	<span class="built_in">f</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：A.11<br>           B.12<br>           C.22<br>           D.编译出错</p>
+<p>2.类的友元函数可以访问类的哪类成员（）</p>
+<p>​	A.private<br>​	B.protected<br>​	C.public<br>​	D.all</p>
+<p>3.在64位操作系统中：<br>unsigned char *p1;<br>unsigned int  *p2;<br>p1&#x3D;(unsigned char*)0x801000)0x810000;<br>p2 &#x3D;(unsigned int *)0x810000;</p>
+<p>请问p1+3&#x3D; () ? p2+3&#x3D; () ?</p>
+<p>​	A.0x801003,0x810012<br>​	B.0x801003,0x81000C<br>​	C.0x801018,0x810018<br>​	D.0x80100C,0x81000C</p>
+<p>4.. typedef unsigned short WORD;<br>在32位系统(g++-m32) 中，WORD类型的变量最大值是()</p>
+<p>​	A.32767<br>​	B.32768<br>​	C.65535<br>​	D.65536</p>
+<p>5..C++代码中，一个继承自某个基类的派生类对象析构时，以下四个执行动作按顺序排序，排第二的是()</p>
+<p>​	A.执行派生类析构函数<br>​	B.执行基类析构函数<br>​	C.执行派生类成员析构<br>​	D.执行基类成员析构</p>
+<p>6.有关析构函数的说法不正确的是()</p>
+<p>​	A.析构函数有且仅有一个<br>​	B.析构函数和构造函数一样可以有形参<br>​	C.析构函数的功能是用来释放一个对象<br>​	D.析构函数无任何函数类型</p>
+<p>7.以下哪个标识符属于C++关键字()</p>
+<p>A.string<br>B.virtual<br>C.interface<br>D.abstract</p>
+<p>8.下面对静态数据成员的描述中，正确的是()</p>
+<p>A.类的每个对象都有自己的静态数据成员<br>B.类的不同对象有不同的静态数据成员值<br>C.静态数据成员是类的所有对象共享的数据<br>D.静态数据成员不能通过类的对象调用</p>
+<p>9.以下关于智能指针的说法错误的是()</p>
+<p>A.shared_ptr使用一次引用计数就加一次<br>B.weak_ptr使用一次引用计数不增加<br>C.查看weak_ptr的引用计数,就是对应的shared_ptr 的引用计数<br>D.weak_ptr.lock()返回一个shared_ptr,如果返回的shared_ptr被使用引用计数也不会增加</p>
+<p>10.以下四行代码<br>1、const  char* a &#x3D; NULL;<br>2、char*  const b &#x3D; a;<br>3、a &#x3D;”something”；<br>4、b &#x3D;”anything”；<br>编译出错的有()</p>
+<p>A.1234<br>B.23<br>C.24<br>D.34</p>
+<p>11.析构函数里面不能做的事是()</p>
+<p>A.堆内存读写<br>B.抛出异常<br>C.临时智能指针中new对象<br>D.成员对象的释放</p>
+<p>12.下列关于函数模板的描述中，正确的是()</p>
+<p>A.函数模板的类型参数与函数的参数是同一个概念<br>B.使用函数模板定义的函数没有返回类型<br>C.函数模板的类型参数与函数的参数相同<br>D.一个类定义中，只要有一个函数模板，则这个类是类模板</p>
+<p>13.以下代码段运行完后sum的值是()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> ( j= <span class="number">1</span>;j&lt; <span class="number">4</span>;j++)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">switch</span>(j)</span><br><span class="line">  &#123;</span><br><span class="line">	<span class="built_in">case</span>(<span class="number">1</span>):</span><br><span class="line">	<span class="keyword">continue</span>;</span><br><span class="line">	<span class="built_in">case</span>(<span class="number">2</span>):</span><br><span class="line">	sum += j;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">sum +=j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	A.2<br>​	B.3<br>​	C.7<br>​	D.8</p>
+<p>14.对于n个结点的单向链表(无表头结点)，需要指针单元的个数至少为 ()</p>
+<p>​	A.n-1<br>​	B.n<br>​	C.n+1<br>​	D.2n</p>
+<p>15..32位系统上，以下程序的运行结果是()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">count</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> c = <span class="number">0</span></span><br><span class="line">	*a=++c+*a+b;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> * str=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> i,sum=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    str=(<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">    <span class="built_in">memset</span>(str,<span class="string">&#x27;0&#x27;</span>,<span class="number">16</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(str,<span class="string">&quot;12345678&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">sizeof</span>(str);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">count</span>(&amp;sum,str[i]-<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​     A.14<br>​	B.20<br>​	C.72<br>​	D.124</p>
+<ol start="16">
+<li></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="type">int</span> a = <span class="number">320</span>;</span><br><span class="line"> <span class="type">char</span> *ptr;</span><br><span class="line"> ptr =( <span class="type">char</span> * )&amp;a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,*ptr);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码，输出正确的是()</p>
+<p>​	A.2<br>​	B.320<br>​	C.64<br>​	D.以上都不对</p>
+<p>17.以下字符串初始化操作不正确的是()</p>
+<p>​	A.const charpStr &#x3D;”dahua”;<br>​	B.char str[10] &#x3D;{‘d’,’a’,”h’,u’,’a’,’\0’};<br>​	C.char str[10] &#x3D; {dahua);<br>​	D.char str[10] &#x3D;”da”””hu” “a”;</p>
+<p>18.32位设备下，下面哪个程序输出的是4?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A.<span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span> </span>&#123;<span class="type">char</span> alph[<span class="number">16</span>] = <span class="string">&quot;abcd&quot;</span>; <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">sizeof</span>(alph)); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">B.<span class="function"><span class="type">void</span> <span class="title">number</span><span class="params">(<span class="type">char</span> * alph)</span> <span class="params">( printf(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">sizeof</span>(alph)); &#125;<span class="type">int</span> main(<span class="type">int</span> argc, <span class="type">char</span><span class="string">&quot; argv) &#123;char alph(16] = 		&quot;</span>abcd<span class="string">&quot;, number(lalph);return 0;&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="function">C.int main(int argc, char** argv) &#123;char alph[16] = &quot;</span>abc<span class="string">&quot;; printf(&quot;</span>%d\n<span class="string">&quot;, strlen(alph)); return 0; &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="function">D.int main(int argc, char** argv) &#123; printf(&quot;</span>%d\n<span class="string">&quot;, sizeof(&quot;</span>abcd<span class="string">&quot;)); return 0; &#125;</span></span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>19.下面程序的输出结果是多少?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> sum(num1,num2) num1 + num2</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">sum</span>(<span class="built_in">sum</span>(<span class="number">2</span>, <span class="number">5</span>) , <span class="built_in">sum</span>(<span class="number">4</span>,<span class="number">10</span>))* <span class="built_in">sum</span>(<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​		A.51<br>​		B.17<br>​		C.34<br>​		D.105</p>
+<p>20.下面代码运行输出是()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="type">int</span> a[<span class="number">6</span>] = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line">     <span class="type">int</span>*p =(<span class="type">int</span>*)(&amp;a +<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d,%d\n&quot;</span>,*(a + <span class="number">1</span>), *(p - <span class="number">2</span>));</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	A.2,4<br>​	B.2,5<br>​	C.2,6<br>​	D.3,4</p>
+<p>21.下面关于指针使用描述，不正确的是()</p>
+<p>​	A.内存申请之后，需要对指针判空，防止申请失败<br>​	B.定义指针变量时，未对其初始化，可能会出现野指针。但如果是类的成员变量，可以不初始化，因为构造函数会将其默认初始化为空<br>​	C.内存释放之后，需要及时将指针置空<br>​	D.如果一个指针申请内存之后，有多个地方使用它，需要使用共享指针或者智能指针</p>
+<p>22.下面哪项不是C语言常用的运行速度优化方法()</p>
+<p>​	A.查表<br>​	B.用移位实现乘除法运算<br>​	C.使用复合赋值表达式<br>​	D.采用多层for循环</p>
+<p>23.下列哪项不是进程的标准状态?()</p>
+<p>​	A.运行态<br>​	B.就绪态<br>​	C.调度态<br>​	D.等待态</p>
+<p>24.若进栈序列为1，2，3，4，进栈过程中可以出栈，则下列不可能的一个出栈序列是 ()</p>
+<p>​	A.1，4，3，2<br>​	B.2，3，4，1<br>​	C.3，1，4，2<br>​	D.3，4，2，1</p>
+<p>25.下面不属于非对称加密应用范畴的是()</p>
+<p>A.https加密传输<br>B.证书<br>C.数字签名<br>D.通过散列检测文件是否被篡改</p>
+<p>26.以下关于异常的描述，正确的是()<br>A.异常发生后产生切换的上下文包括存储器中程序的代码和数据、它的栈、通用寄存器的内容、程计数器、环境变量以及打开义件描述符的集合<br>B.异常处理函数执行过程中不可能产生上下文切换<br>C.异常处理函数函数中可以对静态全局变量进行写操作<br>D.异常和中断是不同的两种处理机制</p>
+<p>27.哪种方式是非对称加密()</p>
+<p>A.md5<br>B.rsa<br>C.sha256<br>D.des</p>
+<p>28.在嵌入式系统的存储部件中，存取速度最快的是()</p>
+<p>A.内存<br>B.寄存器组<br>C.Flash<br>D.Cache</p>
+<p>29.对下列4个序列，以第一个关键字为基准用快速排序算法进行排序，在第一趟过程中移动记录次数最多的是()</p>
+<p>A.81,82,76,58,27,44,123,120<br>B.81,82,120,123,58,44,27,76<br>C.120,82,81,44,27,123,76,58<br>D.58,27,44,81,120,82,76,123</p>
+<h2 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h2><p>1.判断一种计算机语言是否为面向对象程序设计语言的三个基本特征是()</p>
+<p>2.如果有定义语句intptr[4]，typeid(ptr).name()结果为“A4_Pi”<br>请问对 int*(ptr[4]),typeidptr).name()输出是()</p>
+<p>3.“三五法则“是指（）（）（）这三者之间关系，一旦自定义了其中一个，就必然要自定义另外两个（）（）。</p>
+<p>4.C++的Class定义成员时，不显式指定其作用域，则其作用域为（）</p>
+<ol start="5">
+<li></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">struct</span> <span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function"><span class="type">msg_t</span> *msg:</span></span></span><br><span class="line"><span class="params"><span class="function"><span class="type">int</span> id:</span></span></span><br><span class="line"><span class="params"><span class="function"><span class="type">bool</span> status;</span></span></span><br><span class="line"><span class="params"><span class="function">)</span><span class="type">msg_to_sent_t</span>:</span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+
+<p>在32位系统（g++-32）中，sizeof(msg_to_send_t)&#x3D;()</p>
+<ol start="6">
+<li></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">1</span>:</span><br><span class="line">i+=(i++)+(++i);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i++);</span><br></pre></td></tr></table></figure>
+
+<p>输出i值为()</p>
+<p>7..定义有字符串char str[]&#x3D; “\\a\520\0end”，该字符串的strlen长度为()</p>
+<p>8 ..通常在设计函数的时候，函数之间要（）耦合，函数内部要（）内聚。</p>
+<p>9.初始状态，栈(stack) S是空的，而队列 (queue) Q从头到尾初始化如下: a1,a2,a3,a4，然后对S和Q做以下操作.<br>1.从Q移除一个元素，并把它添加到S，重复操作直到Q为空;<br>2.从S移除一个元素，并把它添加到Q，重复操作直到S为空;<br>3.从Q取出一个元素，该元素是()</p>
+<p>10.栈溢出的常见两个原因为:函数（）调用的层级过深（）占用的内存过大。</p>
+<h2 id="编程题"><a href="#编程题" class="headerlink" title="编程题"></a>编程题</h2><p>1.给你一个字符串 s表示一个员工的出勤记录，其中的每个字符用来标记当天的出勤情况(缺勤、迟到、到场)。记录中只含下面三种字符:<br>A: 缺勤，L:迟到，“P:到场<br>如果员工能够同时满足下面两个条件，则可以获得出勤奖励：<br>按总出勤计，员工缺勤(A)严格少于两天。<br>员工不会存在连续3天或连续3 天以上的迟到(L)记录。<br>如果员工可以获得出勤奖励，返回”YES”;否则，返回“NO”。</p>
+<p>样例输入：PPALLP<br>样例输出：YES</p>
+<p>2.杭州疫情最近又出现反复已知根据条例，将各个地方划分为封控区，管控区，防范区等</p>
+<p>封控区:出现阳性病例的楼宇、单元、点位等即划定为封控区，第一时间落实封闭管控措施。<br>管控区: 阳性病例发病前2天活动比较频繁，具有一定传播风险，且其密接、次密切追踪判断难度较大的区域，划定为管控区。<br>假设当前环境为一个n*m的矩形<br>无风险的地方标注0有阳性病例出现的地方标位2 阳性发病前2日活动频繁的区域标位1<br>如两个区域上下左右紧密相连，则按照高管控级别要求的来划分区域<br><strong>输入</strong><br>第一行输入矩形的行n列m后接n行每行m列行分别为每个地点具体的疫情情况</p>
+<p>1&lt;n&lt;1000<br>1&lt;m&lt;1000<br><strong>输出</strong><br>第一行封控区个数第二行管控区个数</p>
+<p>样例输入:8  14<br>            00000000000000<br>            01112000000010<br>            00021000000000<br>            00000000200000<br>           10000000000022<br>           11000002000011<br>           00000000000000<br>           00000000000000</p>
+<p>样例输出：4  2</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blackcatnr.github.io/2023/09/16/%E5%A4%A7%E5%8D%8E%E7%AC%94%E8%AF%95%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/09/16/STL%E5%AE%B9%E5%99%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            (no title)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/09/03/%E5%B0%8F%E7%B1%B3%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">小米笔试题目：</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> Nrui
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/favicon.ico" alt="MustWin"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> MustWin</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-STL容器"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2023/09/16/STL%E5%AE%B9%E5%99%A8/" class="article-date">
+  <time datetime="2023-09-16T07:11:02.143Z" itemprop="datePublished">2023-09-16</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">5.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">24 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="STL容器"><a href="#STL容器" class="headerlink" title="STL容器"></a>STL容器</h1><h3 id="1-vector容器"><a href="#1-vector容器" class="headerlink" title="1.vector容器"></a>1.vector容器</h3><p>功能：vector容器的功能和数组非常相似，使用时可以把它看成一个数组。</p>
+<h5 id="vector容器和普通数组的区别："><a href="#vector容器和普通数组的区别：" class="headerlink" title="vector容器和普通数组的区别："></a>vector容器和普通数组的区别：</h5><p>1.数组是静态的，长度不可以改变，而vector可以动态扩展，增加长度。（注：&#x3D;&#x3D;动态扩展并不是在原空间之后续接新空间，而是找到比原来更大的内存空间，将原数据拷贝到新空间，释放原空间&#x3D;&#x3D;）<br>2.数组内数据通常存储在栈上，而vector中数据存储在堆上。</p>
+<h5 id="vector的构造函数"><a href="#vector的构造函数" class="headerlink" title="vector的构造函数"></a>vector的构造函数</h5><p>函数原型：<br>1.vector<T>v;  &#x2F;&#x2F;使用模板类，默认构造函数<br>2.vector(v.begin(),v.end());  &#x2F;&#x2F;将(v.begin(),v.end())区间中的元素拷贝给本身<br>3.vector(n,elem);  &#x2F;&#x2F;将n个elem拷贝给本身|<br>4.vector(const  vector &amp;v);   &#x2F;&#x2F;拷贝构造函数</p>
+<h5 id="vector的赋值操作"><a href="#vector的赋值操作" class="headerlink" title="vector的赋值操作"></a>vector的赋值操作</h5><p>函数原型：<br>1.vector&amp;  operator&#x3D;(const   vector &amp;v); &#x2F;&#x2F;重载赋值运算符<br>2.assign(v.begin(),v.end());   &#x2F;&#x2F;将(v.begin(),v.end())区间中的元素赋值给本身<br>3.assign(n,elem);   &#x2F;&#x2F;将n个elem赋值给本身</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">text02</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1,v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">	&#125;</span><br><span class="line">	v2 = v1;                        <span class="comment">//调用1，赋值运算符重载</span></span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v3,v4;</span><br><span class="line">	v3.<span class="built_in">assign</span>(v1.<span class="built_in">begin</span>(), v1.<span class="built_in">end</span>());<span class="comment">//调用2，区间赋值</span></span><br><span class="line">	v4.<span class="built_in">assign</span>(<span class="number">5</span>, <span class="number">9</span>);                <span class="comment">//调用3</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;打印v2: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v2);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;打印v3: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v3);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;打印v4: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v4);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/690b220bfcd547e092c8d8061dfce699.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA77yG5LiN6YCd,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<h5 id="vector的容量与大小"><a href="#vector的容量与大小" class="headerlink" title="vector的容量与大小"></a>vector的容量与大小</h5><p>函数原型：<br>1.empty();  &#x2F;&#x2F;判断容器是否为空，为空返回1，否则返回0<br>2.capacity();  &#x2F;&#x2F;返回容器的容量<br>3.size();     &#x2F;&#x2F;返回容器的大小，即容器中元素的个数<br>4.resize(int num);  &#x2F;&#x2F;重新指定容器的长度为num,若容器变长，则以默认值0填充新位置，如果容器变短，则末尾超过容器长度的元素被删除。<br>5.resize(int num, int  elem);   &#x2F;&#x2F;重新指定容器的长度为num，若容器变长，则以elem填充新位置，如果容器变短，则末尾超过容器长度的元素被删除。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">text03</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">	<span class="keyword">if</span> (v1.<span class="built_in">empty</span>())<span class="comment">//调用1，如果容器为空，则给其赋值</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;v1的容量为：&quot;</span> &lt;&lt; v1.<span class="built_in">capacity</span>() &lt;&lt; endl;<span class="comment">//调用2</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;v1的大小为：&quot;</span> &lt;&lt; v1.<span class="built_in">size</span>() &lt;&lt; endl;<span class="comment">//调用3</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//重新指定容器大小使其变长</span></span><br><span class="line">	v1.<span class="built_in">resize</span>(<span class="number">10</span>);       <span class="comment">//调用4，增加的长度默认值为0</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用4,增加长度后,打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">resize</span>(<span class="number">15</span>, <span class="number">9</span>);    <span class="comment">//调用5，增加的长度赋值为9</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用5,增加长度后,打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	<span class="comment">//重新指定容器大小使其变短</span></span><br><span class="line">	v1.<span class="built_in">resize</span>(<span class="number">10</span>);       <span class="comment">//调用4，删除了上一步中最后赋值为9的5个长度</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用4,减小长度后,打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">resize</span>(<span class="number">5</span>, <span class="number">9</span>);     <span class="comment">//调用5，删除了上一步中默认值为0的5个长度</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用5,减小长度后,打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/da5bb81203234ad89e386e948fb6b7ee.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA77yG5LiN6YCd,size_20,color_FFFFFF,t_70,g_se,x_16" alt="img" style="zoom:80%;" />
+
+<h5 id="vector的插入和删除"><a href="#vector的插入和删除" class="headerlink" title="vector的插入和删除"></a>vector的插入和删除</h5><p>函数原型：<br>1.push_back(ele);   &#x2F;&#x2F;尾部插入元素ele<br>2.pop_back();    &#x2F;&#x2F;删除最后元素<br>3.insert(const_iterator pos,ele);  &#x2F;&#x2F;在迭代器指向的位置pos处插入一个元素ele<br>4.insert(const_iterator pos,int count,ele);    &#x2F;&#x2F;在迭代器指向的位置pos处插入count个元素ele<br>5.erase(const_iterator pos);   &#x2F;&#x2F;删除迭代器指向的元素<br>6.erase(const_iterator begin,const_iterator end);  &#x2F;&#x2F;删除迭代器从begin到end之间的元素<br>7.clear();   &#x2F;&#x2F;删除容器中所有元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">text04</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.<span class="built_in">push_back</span>(<span class="number">6</span>);<span class="comment">//调用1，尾部插入元素6</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">pop_back</span>();<span class="comment">//调用2，删除最后一个元素</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用2，删除最后一个元素后，打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">insert</span>(v1.<span class="built_in">begin</span>(),<span class="number">20</span>);<span class="comment">//调用3，在首位插入20</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用3，在首位插入20，打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">insert</span>(v1.<span class="built_in">end</span>(), <span class="number">3</span>, <span class="number">20</span>);<span class="comment">//调用4，在尾部插入3个20</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用4，在尾部插入3个20，打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">erase</span>(v1.<span class="built_in">begin</span>()); <span class="comment">//调用5，在首位删除一个元素</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用5，在首位删除一个元素，打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">erase</span>(v1.<span class="built_in">begin</span>(),v1.<span class="built_in">end</span>()); <span class="comment">//调用6，删除首位到末尾所有元素，也就是删除全部元素</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用6，删除首位到末尾所有元素，打印v1: &quot;</span>;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	v1.<span class="built_in">clear</span>();<span class="comment">//调用7，清空所有元素</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/9cf4254ab7bc4a1999572b4e6572add4.png" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<h5 id="vector数据存取"><a href="#vector数据存取" class="headerlink" title="vector数据存取"></a>vector数据存取</h5><p>函数原型：<br>1.at(int idx);  &#x2F;&#x2F;返回索引idx所指的数据<br>2.operator[];  &#x2F;&#x2F;返回[]内索引所指的数据<br>3.front();  &#x2F;&#x2F;返回容器中第一个元素<br>4.back();    &#x2F;&#x2F;返回容器中最后一个元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">text05</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		v.<span class="built_in">push_back</span>(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//利用at访问v</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用1，打印v: &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; v.<span class="built_in">at</span>(i) &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">//调用1</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	<span class="comment">//利用[]访问v</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;调用2，打印v: &quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; v[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">//调用2</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;容器中第一个元素是：&quot;</span> &lt;&lt; v.<span class="built_in">front</span>() &lt;&lt; endl;<span class="comment">//调用3</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;容器中最后一个元素是：&quot;</span> &lt;&lt; v.<span class="built_in">back</span>() &lt;&lt; endl;<span class="comment">//调用4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/0c96a078b3704d2f9aa3573df1cdf9ba.png" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<h5 id="vector互换容器"><a href="#vector互换容器" class="headerlink" title="vector互换容器"></a>vector互换容器</h5><p>函数原型：<br>swap(v);  &#x2F;&#x2F;容器v和当前容器互换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">text06_1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1,v2;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		v1.<span class="built_in">push_back</span>(i);</span><br><span class="line">		v2.<span class="built_in">push_back</span>(<span class="number">9</span> - i);</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;交换前：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	<span class="built_in">printVector</span>(v2);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;交换后：&quot;</span> &lt;&lt; endl;</span><br><span class="line">	v1.<span class="built_in">swap</span>(v2);   <span class="comment">//调用互换函数</span></span><br><span class="line">	<span class="built_in">printVector</span>(v1);</span><br><span class="line">	<span class="built_in">printVector</span>(v2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdnimg.cn/5927604994cc47b581df59236d4a4382.png" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<h5 id="vector预留空间"><a href="#vector预留空间" class="headerlink" title="vector预留空间"></a>vector预留空间</h5><p>功能：减少vector在动态扩容时的扩展次数，每次使用push_back(v)时，如果容器v的大小要超过v的容量时，系统就会对v进一次动态扩容，至于扩大多少空间，由系统决定。</p>
+<p>函数原型：<br>reserve(int  len);   &#x2F;&#x2F;容器预留len个元素长度，也就是把容量扩为len，预留的位置不初始化，同时也不可以访问。</p>
+<h3 id="2-deque容器"><a href="#2-deque容器" class="headerlink" title="2.deque容器"></a>2.deque容器</h3><p>deque—-双端队列容器<br>deque和vector有很多的相似之处，比如：<br>1.deque容器也擅长在序列尾部添加或删除元素（时间复杂度为O（1）），而不擅长在序列中间添加或删除元素<br>2.deque容器也可根据需要修改自身的容量和大小。</p>
+<p>不同之处：<br>1.&#x3D;&#x3D;deque还擅长在序列头部添加和删除元素&#x3D;&#x3D;，耗费时间复杂度为O(1)。<br>2.&#x3D;&#x3D;deque容器中存储元素并不能保证所有元素都存储到连续的内存空间中&#x3D;&#x3D;。</p>
+<h5 id="创建deque容器的几种方式："><a href="#创建deque容器的几种方式：" class="headerlink" title="创建deque容器的几种方式："></a>创建deque容器的几种方式：</h5><p>1.创建一个没有任何元素的空deque容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deque&lt;<span class="type">int</span>&gt; d;</span><br></pre></td></tr></table></figure>
+
+<p>和空数组容器不同，空的deque容器在创建之后可以做添加和删除元素的操作。</p>
+<p>2.创建一个具有n个元素的deque容器，其中每个元素都采取对应类型的默认值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">deque&lt;<span class="type">int</span>&gt; <span class="title">d</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>此代码创建一个具有10个元素的deque容器。</p>
+<p>3.创建一个具有n个元素的deque容器，并为每个元素指定初始值：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">deque&lt;<span class="type">int</span>&gt; <span class="title">d</span><span class="params">(<span class="number">10</span>, <span class="number">5</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>此代码创建了一个具有10个元素（元素的值都为5）的deque的容器.</p>
+<p>4.在已有的deque容器的情况下，可以通过拷贝该容器创建一个新的deque容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">d1</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">d2</span><span class="params">(d1)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>必须保证新旧容器存储的元素类型一致。</p>
+<h5 id="deque容器的函数"><a href="#deque容器的函数" class="headerlink" title="deque容器的函数"></a>deque容器的函数</h5><table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">begin（）</td>
+<td align="center">返回指向容器的第一个元素的迭代器。</td>
+</tr>
+<tr>
+<td align="center">end（）</td>
+<td align="center">返回指向容器最后一个元素所在位置后一个位置的迭代器。</td>
+</tr>
+<tr>
+<td align="center">rbegin（）</td>
+<td align="center">返回指向最后一个元素的迭代器。</td>
+</tr>
+<tr>
+<td align="center">rend（）</td>
+<td align="center">返回指向第一个元素所在位置前一个位置的迭代器。</td>
+</tr>
+<tr>
+<td align="center">size（）</td>
+<td align="center">返回实际元素个数。</td>
+</tr>
+<tr>
+<td align="center">max_size（）</td>
+<td align="center">返回容器所能容纳元素个数的最大值。</td>
+</tr>
+<tr>
+<td align="center">resize（）</td>
+<td align="center">改变实际元素的个数。</td>
+</tr>
+<tr>
+<td align="center">empty（）</td>
+<td align="center">判断容器中有元素，若无元素，则返回true；反之，返回false。</td>
+</tr>
+<tr>
+<td align="center">at（）</td>
+<td align="center">使用经过边界检查的索引访问元素。</td>
+</tr>
+<tr>
+<td align="center">front（）</td>
+<td align="center">返回第一个元素的索引。</td>
+</tr>
+<tr>
+<td align="center">back（）</td>
+<td align="center">返回最后一个元素的索引。</td>
+</tr>
+<tr>
+<td align="center">assign（）</td>
+<td align="center">用新元素替换原有的元素。</td>
+</tr>
+<tr>
+<td align="center">push_back（）</td>
+<td align="center">在序列的尾部添加一个元素。</td>
+</tr>
+<tr>
+<td align="center">push_front（）</td>
+<td align="center">在序列的头部添加一个元素。</td>
+</tr>
+<tr>
+<td align="center">pop_back（）</td>
+<td align="center">移除容器尾部的元素。</td>
+</tr>
+<tr>
+<td align="center">pop_front（）</td>
+<td align="center">移除容器头部的元素。</td>
+</tr>
+<tr>
+<td align="center">insert（）</td>
+<td align="center">在指定的位置插入一个或多个元素。</td>
+</tr>
+<tr>
+<td align="center">erase（）</td>
+<td align="center">移除一个元素或一段元素。</td>
+</tr>
+<tr>
+<td align="center">clear（）</td>
+<td align="center">移除所有元素，容器大小为0。</td>
+</tr>
+<tr>
+<td align="center">swap（）</td>
+<td align="center">交换两个容器的所有元素。</td>
+</tr>
+<tr>
+<td align="center">emplace（）</td>
+<td align="center">在指定的位置直接生成一个元素。</td>
+</tr>
+<tr>
+<td align="center">emplace_front（）</td>
+<td align="center">在容器头部生成一个元素。和push_front()的区别是，该函数直接在容器头部构造元素，省去了复制移动元素的过程。</td>
+</tr>
+<tr>
+<td align="center">emplace_back（）</td>
+<td align="center">在容器尾部生成一个元素。和push_back（）的区别是，该函数直接在容器尾部构造元素，省去复制移动元素的过程。</td>
+</tr>
+</tbody></table>
+<h5 id="assign函数使用"><a href="#assign函数使用" class="headerlink" title="assign函数使用"></a>assign函数使用</h5><p>在同一程序中被多次调用后，该函数将销毁先前元素的值，并将新的元素集重新分配给容器。<br>1.使用:<br>        deque_name.assign(size,val);<br>参数：1.size：指定要分配给容器的值的数量。2.val：指定要分配给容器的值。</p>
+<p>案例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// assign 5 values of 10 each </span></span><br><span class="line">    dq.<span class="built_in">assign</span>(<span class="number">5</span>, <span class="number">10</span>); </span><br><span class="line">  </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The deque elements: &quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); it++) </span><br><span class="line">        cout &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// re-assigns 10 values of 15 each </span></span><br><span class="line">    dq.<span class="built_in">assign</span>(<span class="number">10</span>, <span class="number">15</span>); </span><br><span class="line">  </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;\nThe deque elements: &quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); it++) </span><br><span class="line">        cout &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The deque elements: <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> </span><br><span class="line">The deque elements: <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<p>2.使用：<br>            deque1_name.assign(iterator1, iterator2)<br>    参数：1.iterator1:它指定迭代器，该迭代器指向容器的起始元素，该容器的元素将被传输到deque1 。<br>                2.iterator2:它指定迭代器，该迭代器指向容器的最后一个元素，该容器的元素将被传输到deque1。<br>案例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// assign 5 values of 10 each </span></span><br><span class="line">    dq.<span class="built_in">assign</span>(<span class="number">5</span>, <span class="number">10</span>); </span><br><span class="line">  </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The deque elements: &quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); it++) </span><br><span class="line">        cout &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>; </span><br><span class="line">  </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq1; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// assigns all elements from </span></span><br><span class="line">    <span class="comment">// the second position to deque1 </span></span><br><span class="line">    dq1.<span class="built_in">assign</span>(dq.<span class="built_in">begin</span>() + <span class="number">1</span>, dq.<span class="built_in">end</span>());</span><br><span class="line">  </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;\nThe deque1 elements: &quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = dq1.<span class="built_in">begin</span>(); it != dq1.<span class="built_in">end</span>(); it++) </span><br><span class="line">        cout &lt;&lt; *it &lt;&lt; <span class="string">&quot; &quot;</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The <span class="built_in">deque</span> elements: <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> </span><br><span class="line">The deque1 elements: <span class="number">10</span> <span class="number">10</span> <span class="number">10</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="insert员函数使用"><a href="#insert员函数使用" class="headerlink" title="insert员函数使用"></a>insert员函数使用</h5><p>三种使用方法：<br>         1.通过在一个为位置插入新元素val来扩展双端队列。<br>         2.通过在双端队列中插入n个新值val来扩展双端队列。<br>         3.通过在（first，last）范围内插入新元素来扩展双端队列。<br>    deque_name.insert(iterator  position, const  value_type&amp;  val);<br>    deque_name.insert(iterator  position,size_type  n,const  value_type&amp;  val);<br>    deque_name.insert(iterator  position,InputIterator  first,InputIterator  last);<br>    position———指定要插入元素的位置<br>    val———指定要插入的元素数。每个元素都初始化为val的副本<br>    first，last———指定迭代器，该迭代器指定要插入的元素范围。范围包括first和last之间的所有元素，包括first指向的元素，和last指向的元素。</p>
+<p>案例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;; </span><br><span class="line">  </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt;::iterator it = dq.<span class="built_in">begin</span>(); </span><br><span class="line">    ++it; </span><br><span class="line">  </span><br><span class="line">    it = dq.<span class="built_in">insert</span>(it, <span class="number">10</span>); <span class="comment">// 1 10 2 3 4 5 </span></span><br><span class="line">  </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Deque contains:&quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); ++it) </span><br><span class="line">        cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; *it; </span><br><span class="line">    cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deque contains: <span class="number">1</span> <span class="number">10</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;; </span><br><span class="line">  </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt;::iterator it = dq.<span class="built_in">begin</span>(); <span class="comment">//it取dq容器的起始位置</span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 0 0 1 2 3 4 5 </span></span><br><span class="line">    dq.<span class="built_in">insert</span>(it, <span class="number">2</span>, <span class="number">0</span>); <span class="comment">//插入两个00;</span></span><br><span class="line">  </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Deque contains:&quot;</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">for</span> (it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); ++it) </span><br><span class="line">        cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; *it; </span><br><span class="line">    cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deque contains: <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; dq = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;; </span><br><span class="line">  </span><br><span class="line">    deque&lt;<span class="type">int</span>&gt;::iterator it = dq.<span class="built_in">begin</span>(); </span><br><span class="line">    ++it; <span class="comment">//dq的第二个位置</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">2</span>, <span class="number">10</span>)</span></span>; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 1 10 10 2 3 4 5 </span></span><br><span class="line">    dq.<span class="built_in">insert</span>(it, v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>()); </span><br><span class="line">  </span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Deque contains:&quot;</span>; </span><br><span class="line">    <span class="keyword">for</span> (it = dq.<span class="built_in">begin</span>(); it != dq.<span class="built_in">end</span>(); ++it) </span><br><span class="line">        cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; *it; </span><br><span class="line">    cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deque contains: <span class="number">1</span> <span class="number">10</span> <span class="number">10</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="max-size员函数使用"><a href="#max-size员函数使用" class="headerlink" title="max_size员函数使用"></a>max_size员函数使用</h5><p>该函数返回双端队列容器可以容纳的最大元素数。<br>deque_name.max_size()</p>
+<h5 id="emplace-front-、emplace-back-函数使用"><a href="#emplace-front-、emplace-back-函数使用" class="headerlink" title="emplace_front()、emplace_back()函数使用"></a>emplace_front()、emplace_back()函数使用</h5><p>此函数用于将新元素插入到双端队列容器，并将新元素添加到双端队列的开头或者结尾。</p>
+<p>emplace_front()案例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input :mydeque&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">         mydeque.<span class="built_in">emplace_front</span>(<span class="number">6</span>);</span><br><span class="line">Output:mydeque = <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></span><br><span class="line"></span><br><span class="line">Input :mydeque&#123;&#125;;</span><br><span class="line">         mydeque.<span class="built_in">emplace_front</span>(<span class="number">4</span>);</span><br><span class="line">Output:mydeque = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span> </span></span><br><span class="line">using namespace <span class="built_in">std</span>; </span><br><span class="line">  </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123; </span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="built_in">string</span>&gt; mydeque; </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;portal&quot;</span>); </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;science&quot;</span>); </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;computer&quot;</span>); </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;a&quot;</span>); </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;is&quot;</span>); </span><br><span class="line">    mydeque.emplace_front(<span class="string">&quot;GEEKSFORGEEKS&quot;</span>); </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// deque becomes GEEKSFORGEEKS, is, a, </span></span><br><span class="line">    <span class="comment">// computer, science, portal </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// printing the deque </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = mydeque.begin();it != mydeque.end(); ++it) </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; *it; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GEEKSFORGEEKS is a computer science portal</span><br></pre></td></tr></table></figure>
+
+<p>emplace_back()案例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input :mydeque&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">         mydeque.emplace_back(<span class="number">6</span>);</span><br><span class="line">Output:mydeque = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span></span><br><span class="line"></span><br><span class="line">Input :mydeque&#123;&#125;;</span><br><span class="line">         mydeque.emplace_back(<span class="number">4</span>);</span><br><span class="line">Output:mydeque = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    deque&lt;string&gt; mydeque; </span><br><span class="line">    mydeque.<span class="built_in">emplace_back</span>(<span class="string">&quot;Hi&quot;</span>); </span><br><span class="line">    mydeque.<span class="built_in">emplace_back</span>(<span class="string">&quot;this&quot;</span>); </span><br><span class="line">    mydeque.<span class="built_in">emplace_back</span>(<span class="string">&quot;is&quot;</span>); </span><br><span class="line">    mydeque.<span class="built_in">emplace_back</span>(<span class="string">&quot;geeksforgeeks&quot;</span>); </span><br><span class="line">    <span class="comment">// deque becomes Hi this is geeksforgeeks </span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// printing the deque </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it = mydeque.<span class="built_in">begin</span>();it != mydeque.<span class="built_in">end</span>(); ++it) </span><br><span class="line">        cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; *it; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi <span class="keyword">this</span> is geeksforgeeks</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-List容器"><a href="#3-List容器" class="headerlink" title="3.List容器"></a>3.List容器</h3><p>list容器，又称双向链表容器。该容器底层是以双向链表的形式实现的。<br>list容器可以在序列已知的任何位置快速插入或删除元素（时间复杂度O（1））。并且在list容器中移动元素，也比其他容器效率高。&#x3D;&#x3D;不能像array和vector一样通过位置直接访问元素。只有运用迭代器，才能访问list容器中存储的各个元素&#x3D;&#x3D;。</p>
+<p>注：<br>    1.双向迭代器不能通过下标访问List容器中指定位置处的元素。<br>    2.双向迭代器不支持使用-&#x3D;、+&#x3D;、+、-运算符。<br>    3.双向迭代器不支持使用&lt;、&gt;、&lt;&#x3D;、&gt;&#x3D;比较运算符。</p>
+<p>几种不常使用的函数：<br>    1.insert()   在容器中的指定位置插入元素。<br>    2.splice()   将一个list容器中的元素插入到另一个容器的指定位置。<br>    3.remove(val)   删除容器中所有等于val的元素。<br>    4.remove_if()    删除容器中满足条件的元素。<br>    5.unique()    删除容器中相邻的重复元素，只保留一个。<br>    6.merge()    合并两个事先已排好序的list容器，并且合并之后的list容器依然是有序的。<br>    7.sort()      通过更改容器中元素的位置，将它们进行排序。<br>    8.reverse()    反转容器中元素的顺序。</p>
+<p>案例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test&#123; <span class="number">1</span>,<span class="number">2</span> &#125;;</span><br><span class="line">	test.<span class="built_in">insert</span>(test.<span class="built_in">begin</span>(), <span class="number">0</span>);<span class="comment">//指定的位置之前插入 1 个元素 3 &#123;0,1,2&#125;</span></span><br><span class="line">	test.<span class="built_in">insert</span>(test.<span class="built_in">end</span>(), <span class="number">2</span>, <span class="number">3</span>);<span class="comment">//指定的位置之前插入 2 个元素 3 &#123;0,1,2,3,3&#125;</span></span><br><span class="line">	std::array&lt;<span class="type">int</span>, 3&gt;tmp&#123; <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;</span><br><span class="line">	test.<span class="built_in">insert</span>(test.<span class="built_in">end</span>(), tmp.<span class="built_in">begin</span>(), tmp.<span class="built_in">end</span>());<span class="comment">//将其他容器中特定位置的元素插入指定位置 &#123;0,1,2,3,3,4,5,6&#125;</span></span><br><span class="line">	test.<span class="built_in">insert</span>(test.<span class="built_in">end</span>(),&#123;<span class="number">7</span>,<span class="number">8</span>&#125;);<span class="comment">//插入初始化列表中所有的元素&#123;0,1,2,3,3,4,5,6,7,8&#125;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test1&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test2&#123; <span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span> &#125;;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt;::iterator it = ++test1.<span class="built_in">begin</span>(); <span class="comment">//it 迭代器指向元素 2</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//第一种用法：将test2的所有元素移动到2所在的位置:</span></span><br><span class="line">	test1.<span class="built_in">splice</span>(it, test2);<span class="comment">//test1:&#123;1,5,6,7,2,3,4&#125;; test2:&#123;&#125;; it迭代器仍然指向元素2</span></span><br><span class="line">													</span><br><span class="line">	<span class="comment">//第二种用法：将 it 指向的元素 2 移动到 test2.begin()位置:</span></span><br><span class="line">	test2.<span class="built_in">splice</span>(test2.<span class="built_in">begin</span>(), test1, it);	<span class="comment">//test1:&#123;1,5,6,7,3,4&#125;; test2:&#123;2&#125;; it仍然指向元素2</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//第三种用法：，将 [test1.begin(),test1.end())范围内的元素移动到 test2.begin() 位置:</span></span><br><span class="line">	test2.<span class="built_in">splice</span>(test2.<span class="built_in">begin</span>(), test1, test1.<span class="built_in">begin</span>(), test1.<span class="built_in">end</span>());	<span class="comment">//test1:&#123;&#125;; test2:&#123;1,5,6,7,3,4,2&#125;;it仍然指向元素2</span></span><br><span class="line">																</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;test1.size(): &quot;</span> &lt;&lt; test1.<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;test2.size(): &quot;</span> &lt;&lt; test2.<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;it: &quot;</span> &lt;&lt; *it &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test2) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test1.<span class="built_in">size</span>(): <span class="number">0</span></span><br><span class="line">test2.<span class="built_in">size</span>(): <span class="number">7</span></span><br><span class="line">it: <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">3</span> <span class="number">4</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test&#123; <span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">99</span>,<span class="number">0</span> &#125;;</span><br><span class="line">	test.<span class="built_in">pop_back</span>();<span class="comment">//移除最后一个元素&#123;0,1,2,3,3,3,4,5,6,7,6,5,4,3,2,1,99&#125;</span></span><br><span class="line">	test.<span class="built_in">pop_front</span>();<span class="comment">//移除第一个元素&#123;1,2,3,3,3,4,5,6,7,6,5,4,3,2,1,99&#125;</span></span><br><span class="line">	test.<span class="built_in">erase</span>(++test.<span class="built_in">begin</span>()); <span class="comment">//删除第二个元素&#123;1,3,3,3,4,5,6,7,6,5,4,3,2,1,99&#125;</span></span><br><span class="line">	<span class="comment">//删除指定元素</span></span><br><span class="line">	<span class="keyword">for</span> (std::list&lt;<span class="type">int</span>&gt;::iterator i = test.<span class="built_in">begin</span>(); i != test.<span class="built_in">end</span>();++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> ((*i) == <span class="number">7</span>) &#123;</span><br><span class="line">			test.<span class="built_in">erase</span>(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//&#123;1,3,3,3,4,5,6,6,5,4,3,2,1,99&#125;</span></span><br><span class="line">	test.<span class="built_in">remove</span>(<span class="number">99</span>);<span class="comment">//删除元素99 &#123;1,3,3,3,4,5,6,6,5,4,3,2,1&#125;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout&lt;&lt; std::endl;</span><br><span class="line">	test.<span class="built_in">erase</span>(++test.<span class="built_in">begin</span>(), --test.<span class="built_in">end</span>());<span class="comment">//删除指定一段元素 &#123;1,1&#125;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	test.<span class="built_in">clear</span>();<span class="comment">//清空</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">3</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="comment">//二元谓词函数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">fuc1</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a / <span class="number">10</span> == b / <span class="number">10</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test&#123;<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">30</span>,<span class="number">50</span>,<span class="number">60</span>&#125;;</span><br><span class="line">	<span class="comment">//方式一：</span></span><br><span class="line">	test.<span class="built_in">unique</span>();<span class="comment">//删除相邻重复的元素，仅保留一份</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt; std::endl;</span><br><span class="line">	<span class="comment">//方式二:</span></span><br><span class="line">	test.<span class="built_in">unique</span>(fuc1);<span class="comment">//fuc1 为二元谓词函数，是我们自定义的去重规则</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span> <span class="number">31</span> <span class="number">32</span> <span class="number">33</span> <span class="number">40</span> <span class="number">50</span> <span class="number">60</span> <span class="number">30</span> <span class="number">50</span> <span class="number">60</span></span><br><span class="line"><span class="number">10</span> <span class="number">20</span> <span class="number">30</span> <span class="number">40</span> <span class="number">50</span> <span class="number">60</span> <span class="number">30</span> <span class="number">50</span> <span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;</span><br><span class="line">	test.<span class="built_in">remove_if</span>([](<span class="type">int</span> n)&#123;<span class="built_in">return</span> (n % <span class="number">2</span> != <span class="number">0</span>);&#125; ); <span class="comment">//删除test容器中能够使lamba表达式成立的所有元素。</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">4</span> <span class="number">6</span> <span class="number">8</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::list&lt;<span class="type">int</span>&gt; test&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;</span><br><span class="line">	<span class="keyword">auto</span> it = test.<span class="built_in">begin</span>();</span><br><span class="line">	std::<span class="built_in">advance</span>(it, <span class="number">5</span>);</span><br><span class="line">	*it = <span class="number">60</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : test) &#123;</span><br><span class="line">		std::cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	std::cout &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">60</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="4-map容器"><a href="#4-map容器" class="headerlink" title="4.map容器"></a>4.map容器</h3><p>map中所有元素都是pair，pair中的第一个元素为key（键值），起到索引作用，第二个元素为value（实值）；所有的元素都会根据元素的键值自动排序（键值小到大排序），map&#x2F;multimap属于关联式容器，底层实现是二叉树（红黑树）。<br>map和multimap的区别：<br>1.map不允许容器中有重复key值<br>2.multimap允许有重复的key值</p>
+<h5 id="不经常使用函数："><a href="#不经常使用函数：" class="headerlink" title="不经常使用函数："></a>不经常使用函数：</h5><p>count()  &#x2F;&#x2F;返回指定元素出现的次数<br>equal_range()      &#x2F;&#x2F;返回特殊条目的迭代器对<br>max_size()    &#x2F;&#x2F;返回容器可以容纳的最大元素个数<br>swap()     &#x2F;&#x2F;交换两个map容器内容<br>find()   &#x2F;&#x2F;查找一个元素<br>erase()   &#x2F;&#x2F;删除一个元素  ；erase(start，last)删除区间（start，last）的所有元素。</p>
+<h5 id="map中的insert的使用"><a href="#map中的insert的使用" class="headerlink" title="map中的insert的使用"></a>map中的insert的使用</h5><p>插入的三种方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> test（）</span><br><span class="line">&#123;</span><br><span class="line">   map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;m;</span><br><span class="line">    <span class="comment">//第一种插入</span></span><br><span class="line">	m.<span class="built_in">insert</span>(<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(<span class="number">1</span>,<span class="number">10</span>));</span><br><span class="line">    <span class="comment">//第二种</span></span><br><span class="line">	m.<span class="built_in">insert</span>(<span class="built_in">make_pair</span>(<span class="number">2</span>,<span class="number">20</span>));</span><br><span class="line">	<span class="comment">//第三种</span></span><br><span class="line">	m.<span class="built_in">insert</span>(map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;::<span class="built_in">value_type</span>(<span class="number">3</span>,<span class="number">30</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-map中的swap用法"><a href="#1-map中的swap用法" class="headerlink" title="1.map中的swap用法"></a>1.map中的swap用法</h5><p>map中的swap不是一个容器中的元素交换，而是两个容器所有元素的交换。</p>
+<h5 id="2-map中的sort问题"><a href="#2-map中的sort问题" class="headerlink" title="2.map中的sort问题"></a>2.map中的sort问题</h5><p>map中的元素是自动按照key升序排序的，所以不能直接用sort函数。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blackcatnr.github.io/2023/09/16/STL%E5%AE%B9%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/09/16/%E5%A4%A7%E5%8D%8E%E7%AC%94%E8%AF%95%E9%A2%98/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> Nrui
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/favicon.ico" alt="MustWin"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
